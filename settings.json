@@ -1,0 +1,14 @@
+{
+    "colors": {
+        "flagged": "#4b1f5c",
+        "complete": "#1f5c2a",
+        "overdue": "#5c1e1e",
+        "soon": "#6b5a16",
+        "even": "#2b2b2b",
+        "odd": "#242424"
+    },
+    "selection": {
+        "background": "#bee9e8",
+        "foreground": "#ffffff"
+    }
+}
