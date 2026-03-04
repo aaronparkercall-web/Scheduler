@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 import copy
+import csv
 from typing import Any
 
 import tkinter as tk
-from tkinter import simpledialog
+from tkinter import filedialog, simpledialog
 import ttkbootstrap as ttk
 
 from state import AppState
@@ -389,3 +390,31 @@ class ActionHandlers:
         self.table_all.selection_set(iid)
         self.table_all.focus(iid)
         self.table_all.see(iid)
+
+    def download_all_assignments_spreadsheet(self) -> None:
+        rows = sorted(self.state.data, key=lambda item: item["datetime"])
+        save_path = filedialog.asksaveasfilename(
+            title="Download All Assignments",
+            defaultextension=".csv",
+            filetypes=[("CSV files", "*.csv"), ("All files", "*.*")],
+            initialfile="all_assignments.csv",
+        )
+        if not save_path:
+            return
+
+        columns = ["Date", "Time", "Class", "Assignment", "Score", "Max Points", "Grade", "Flag", "Complete"]
+        with open(save_path, "w", newline="", encoding="utf-8") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(columns)
+            for item in rows:
+                writer.writerow([
+                    item.get("Date", ""),
+                    item.get("Time", ""),
+                    item.get("Class", ""),
+                    item.get("Assignment", ""),
+                    item.get("Score", ""),
+                    item.get("MaxPoints", ""),
+                    item.get("Grade", ""),
+                    "Yes" if item.get("Flagged") else "No",
+                    "Yes" if item.get("Complete") else "No",
+                ])
