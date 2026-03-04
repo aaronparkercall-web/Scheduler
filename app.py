@@ -153,6 +153,12 @@ def main() -> None:
     ttk.Button(button_frame, text="Update Assignment", command=handlers.update_assignment, bootstyle="warning").pack(side="left", padx=4)
     ttk.Button(button_frame, text="Delete Selected", command=handlers.delete_selected, bootstyle="danger").pack(side="left", padx=4)
     ttk.Button(button_frame, text="Toggle Complete", command=handlers.toggle_complete, bootstyle="primary").pack(side="left", padx=4)
+    ttk.Button(
+        button_frame,
+        text="Download All Assignments",
+        command=handlers.download_all_assignments_spreadsheet,
+        bootstyle="light",
+    ).pack(side="left", padx=4)
     ttk.Button(button_frame, text="Undo (Ctrl+Z)", command=handlers.undo_last_action, bootstyle="secondary").pack(side="left", padx=4)
 
     # Settings tab
