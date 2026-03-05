@@ -18,18 +18,21 @@ from ui_settings import build_settings_tab
 
 
 def main() -> None:
-    app = ttk.Window(themename="darkly")
+    app = ttk.Window(themename="flatly")
     app.title("Assignment Dashboard")
-    app.geometry("1320x700")
+    app.geometry("1380x760")
     app.minsize(1100, 500)
     app.option_add("*Font", "{Segoe UI} 10")
 
     style = ttk.Style()
-    style.configure("Treeview", rowheight=30, borderwidth=1, relief="solid")
-    style.configure("Treeview.Heading", borderwidth=1, relief="solid")
-    style.configure("Title.TLabel", font=("Segoe UI", 18, "bold"))
+    style.configure("Treeview", rowheight=34, borderwidth=0)
+    style.configure("Treeview.Heading", font=("Segoe UI", 10, "bold"), borderwidth=0)
+    style.configure("Title.TLabel", font=("Segoe UI", 22, "bold"))
     style.configure("Subtitle.TLabel", font=("Segoe UI", 10))
+    style.configure("SectionTitle.TLabel", font=("Segoe UI", 12, "bold"))
     style.configure("BoldLabel.TLabel", font=("Segoe UI", 9, "bold"))
+    style.configure("SidebarTitle.TLabel", font=("Segoe UI", 18, "bold"))
+    style.configure("SidebarText.TLabel", font=("Segoe UI", 10))
 
     # State
     state = AppState()
@@ -39,19 +42,42 @@ def main() -> None:
 
     apply_treeview_selection_style(style, state.settings)
 
+    root = ttk.Frame(app, padding=18)
+    root.pack(fill="both", expand=True)
+
+    sidebar = ttk.Frame(root, padding=(20, 24), bootstyle="light")
+    sidebar.pack(side="left", fill="y", padx=(0, 12))
+
+    ttk.Label(sidebar, text="Scheduler", style="SidebarTitle.TLabel").pack(anchor="w", pady=(0, 4))
+    ttk.Label(sidebar, text="Plan and track all class work in one place.", style="SidebarText.TLabel").pack(anchor="w", pady=(0, 20))
+
+    ttk.Label(sidebar, text="Workspace", style="SectionTitle.TLabel").pack(anchor="w", pady=(0, 8))
+    ttk.Label(sidebar, text="• All Assignments", style="SidebarText.TLabel").pack(anchor="w", pady=2)
+    ttk.Label(sidebar, text="• Flagged", style="SidebarText.TLabel").pack(anchor="w", pady=2)
+    ttk.Label(sidebar, text="• Planner", style="SidebarText.TLabel").pack(anchor="w", pady=2)
+    ttk.Label(sidebar, text="• Settings", style="SidebarText.TLabel").pack(anchor="w", pady=(2, 18))
+
+    quick_card = ttk.Labelframe(sidebar, text="Tips", padding=(12, 12), bootstyle="info")
+    quick_card.pack(fill="x", pady=(0, 12))
+    ttk.Label(quick_card, text="Right-click rows to flag and add notes.", style="SidebarText.TLabel", wraplength=210).pack(anchor="w", pady=(0, 8))
+    ttk.Label(quick_card, text="Use Ctrl+Z to undo the last change.", style="SidebarText.TLabel", wraplength=210).pack(anchor="w")
+
+    main_area = ttk.Frame(root)
+    main_area.pack(side="left", fill="both", expand=True)
+
     # Header
-    header_frame = ttk.Frame(app, padding=(20, 16, 20, 8))
-    header_frame.pack(fill="x")
-    ttk.Label(header_frame, text="Assignment Dashboard", style="Title.TLabel").pack(anchor="w")
+    header_card = ttk.Frame(main_area, padding=(18, 16), bootstyle="light")
+    header_card.pack(fill="x", pady=(0, 10))
+    ttk.Label(header_card, text="Assignment Dashboard", style="Title.TLabel").pack(anchor="w")
     ttk.Label(
-        header_frame,
-        text="Track assignments, grades, and flags by class in one place.",
+        header_card,
+        text="Track assignments, grades, and planner items with the same reliable workflow.",
         style="Subtitle.TLabel",
     ).pack(anchor="w", pady=(3, 0))
 
     # Inputs
-    input_card = ttk.Labelframe(app, text="Assignment Details", padding=(14, 12))
-    input_card.pack(fill="x", padx=20, pady=(0, 10))
+    input_card = ttk.Labelframe(main_area, text="Assignment Details", padding=(14, 12), bootstyle="primary")
+    input_card.pack(fill="x", pady=(0, 10))
 
     input_frame = ttk.Frame(input_card)
     input_frame.pack(fill="x")
@@ -94,8 +120,8 @@ def main() -> None:
         input_frame.columnconfigure(col, weight=1)
 
     # Tabs
-    notebook = ttk.Notebook(app)
-    notebook.pack(fill="both", expand=True, padx=20, pady=(0, 10))
+    notebook = ttk.Notebook(main_area, bootstyle="primary")
+    notebook.pack(fill="both", expand=True, pady=(0, 10))
 
     tab_all = ttk.Frame(notebook)
     tab_flagged = ttk.Frame(notebook)
@@ -110,7 +136,7 @@ def main() -> None:
     # Tables
     table_all, table_flagged = build_main_tables(tab_all, tab_flagged, state.settings)
 
-    planner_controls = ttk.Labelframe(tab_planner, text="Planner Actions", padding=(10, 10))
+    planner_controls = ttk.Labelframe(tab_planner, text="Planner Actions", padding=(10, 10), bootstyle="secondary")
     planner_controls.pack(fill="x", padx=8, pady=(8, 6))
 
     ttk.Label(planner_controls, text="Assignment", style="BoldLabel.TLabel").grid(row=0, column=0, sticky="w", padx=4)
@@ -197,21 +223,21 @@ def main() -> None:
     app.bind_all("<Delete>", lambda e: handlers.delete_selected())
 
     # Buttons
-    button_frame = ttk.Labelframe(app, text="Actions", padding=(12, 10))
-    button_frame.pack(fill="x", padx=20, pady=(0, 10))
+    button_frame = ttk.Labelframe(sidebar, text="Actions", padding=(12, 10), bootstyle="primary")
+    button_frame.pack(fill="x", pady=(4, 0))
 
-    ttk.Button(button_frame, text="Add Assignment", command=handlers.add_assignment, bootstyle="success").pack(side="left", padx=4)
-    ttk.Button(button_frame, text="Edit Selected", command=handlers.load_selected, bootstyle="info").pack(side="left", padx=4)
-    ttk.Button(button_frame, text="Update Assignment", command=handlers.update_assignment, bootstyle="warning").pack(side="left", padx=4)
-    ttk.Button(button_frame, text="Delete Selected", command=handlers.delete_selected, bootstyle="danger").pack(side="left", padx=4)
-    ttk.Button(button_frame, text="Toggle Complete", command=handlers.toggle_complete, bootstyle="primary").pack(side="left", padx=4)
+    ttk.Button(button_frame, text="Add Assignment", command=handlers.add_assignment, bootstyle="success").pack(fill="x", pady=3)
+    ttk.Button(button_frame, text="Edit Selected", command=handlers.load_selected, bootstyle="info").pack(fill="x", pady=3)
+    ttk.Button(button_frame, text="Update Assignment", command=handlers.update_assignment, bootstyle="warning").pack(fill="x", pady=3)
+    ttk.Button(button_frame, text="Delete Selected", command=handlers.delete_selected, bootstyle="danger").pack(fill="x", pady=3)
+    ttk.Button(button_frame, text="Toggle Complete", command=handlers.toggle_complete, bootstyle="primary").pack(fill="x", pady=3)
     ttk.Button(
         button_frame,
         text="Download All Assignments",
         command=handlers.download_all_assignments_spreadsheet,
         bootstyle="light",
-    ).pack(side="left", padx=4)
-    ttk.Button(button_frame, text="Undo (Ctrl+Z)", command=handlers.undo_last_action, bootstyle="secondary").pack(side="left", padx=4)
+    ).pack(fill="x", pady=3)
+    ttk.Button(button_frame, text="Undo (Ctrl+Z)", command=handlers.undo_last_action, bootstyle="secondary").pack(fill="x", pady=3)
 
     # Settings tab
     build_settings_tab(
