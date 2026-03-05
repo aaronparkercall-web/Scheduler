@@ -10,7 +10,7 @@ import ttkbootstrap as ttk
 
 from state import AppState
 from parsing import parse_mmdd_to_datetime, compute_displays_from_inputs
-from storage import save_data
+from storage import save_data, save_planner_items
 from ui_tables import refresh_tables as refresh_tables_full
 
 
@@ -22,8 +22,10 @@ class ActionHandlers:
         tab_all: ttk.Frame,
         tab_flagged: ttk.Frame,
         tab_settings: ttk.Frame,
+        tab_planner: ttk.Frame,
         table_all: ttk.Treeview,
         table_flagged: ttk.Treeview,
+        table_planner: ttk.Treeview,
         style: ttk.Style,
         state: AppState,
         # inputs:
@@ -34,14 +36,20 @@ class ActionHandlers:
         score_var: ttk.StringVar,
         grade_var: ttk.StringVar,
         max_points_var: ttk.StringVar,
+        planner_assignment_var: ttk.StringVar,
+        planner_todo_date_var: ttk.StringVar,
+        planner_event_title_var: ttk.StringVar,
+        planner_event_class_var: ttk.StringVar,
     ) -> None:
         self.app = app
         self.notebook = notebook
         self.tab_all = tab_all
         self.tab_flagged = tab_flagged
         self.tab_settings = tab_settings
+        self.tab_planner = tab_planner
         self.table_all = table_all
         self.table_flagged = table_flagged
+        self.table_planner = table_planner
         self.style = style
         self.state = state
 
@@ -52,10 +60,16 @@ class ActionHandlers:
         self.score_var = score_var
         self.grade_var = grade_var
         self.max_points_var = max_points_var
+        self.planner_assignment_var = planner_assignment_var
+        self.planner_todo_date_var = planner_todo_date_var
+        self.planner_event_title_var = planner_event_title_var
+        self.planner_event_class_var = planner_event_class_var
 
         self.menu = tk.Menu(app, tearoff=0)
         self.menu.add_command(label="Flag", command=lambda: self.set_flag_for_selection(True, self.active_treeview()))
         self.menu.add_command(label="Unflag", command=lambda: self.set_flag_for_selection(False, self.active_treeview()))
+        self.menu.add_separator()
+        self.menu.add_command(label="Add to Planner…", command=lambda: self.add_selected_to_planner_prompt(self.active_treeview()))
         self.menu.add_separator()
         self.menu.add_command(label="Add/Edit Note…", command=lambda: self.edit_note_for_selection(self.active_treeview()))
         self.menu.add_command(label="Clear Note", command=lambda: self.clear_note_for_selection(self.active_treeview()))
@@ -96,6 +110,7 @@ class ActionHandlers:
             notebook=self.notebook,
             table_all=self.table_all,
             table_flagged=self.table_flagged,
+            table_planner=self.table_planner,
             settings=self.state.settings,
             on_right_click_any=self.on_right_click_any,
             on_select=self.capture_selection,
@@ -103,7 +118,7 @@ class ActionHandlers:
         )
 
     def get_all_treeviews(self) -> list[ttk.Treeview]:
-        trees = [self.table_all, self.table_flagged]
+        trees = [self.table_all, self.table_flagged, self.table_planner]
         for _, obj in self.state.class_tabs.items():
             trees.append(obj["tree"])
         return trees
@@ -115,6 +130,8 @@ class ActionHandlers:
             return self.table_all
         if current_tab == str(self.tab_flagged):
             return self.table_flagged
+        if current_tab == str(self.tab_planner):
+            return self.table_planner
         if current_tab == str(self.tab_settings):
             return self.table_all
         for _, obj in self.state.class_tabs.items():
@@ -300,6 +317,14 @@ class ActionHandlers:
         if not sel:
             return
 
+        if tree == self.table_planner:
+            indices = sorted([int(iid) for iid in sel], reverse=True)
+            for idx in indices:
+                self.state.planner_items.pop(idx)
+            self.refresh_tables()
+            save_planner_items(self.state.planner_items)
+            return
+
         self.push_undo_state()
         indices = sorted([int(iid) for iid in sel], reverse=True)
         for idx in indices:
@@ -310,6 +335,73 @@ class ActionHandlers:
         self.clear_inputs()
         self.refresh_tables(jump=True)
         save_data(self.state.data)
+
+    def planner_assignment_options(self) -> list[str]:
+        options: list[str] = []
+        for item in sorted(self.state.data, key=lambda x: x["datetime"]):
+            label = f"{item.get('Date', '')} | {item.get('Class', '')} | {item.get('Assignment', '')}"
+            options.append(label)
+        return options
+
+    def add_assignment_to_planner_from_dropdown(self) -> None:
+        selected_label = self.planner_assignment_var.get().strip()
+        todo_date = self.planner_todo_date_var.get().strip()
+        if not selected_label or not todo_date:
+            return
+
+        for item in sorted(self.state.data, key=lambda x: x["datetime"]):
+            label = f"{item.get('Date', '')} | {item.get('Class', '')} | {item.get('Assignment', '')}"
+            if label == selected_label:
+                self.state.planner_items.append({
+                    "Type": "Assignment",
+                    "TodoDate": todo_date,
+                    "Class": item.get("Class", ""),
+                    "Title": item.get("Assignment", ""),
+                })
+                save_planner_items(self.state.planner_items)
+                self.refresh_tables()
+                return
+
+    def add_selected_to_planner_prompt(self, tree: ttk.Treeview) -> None:
+        if tree == self.table_planner:
+            return
+        sel = tree.selection()
+        if not sel:
+            return
+
+        todo_date = simpledialog.askstring("Add to Planner", "Enter TODO date (MM/DD):")
+        if not todo_date:
+            return
+
+        for iid in sel:
+            idx = int(iid)
+            item = self.state.data[idx]
+            self.state.planner_items.append({
+                "Type": "Assignment",
+                "TodoDate": todo_date,
+                "Class": item.get("Class", ""),
+                "Title": item.get("Assignment", ""),
+            })
+
+        save_planner_items(self.state.planner_items)
+        self.refresh_tables()
+
+    def add_event_to_planner(self) -> None:
+        todo_date = self.planner_todo_date_var.get().strip()
+        title = self.planner_event_title_var.get().strip()
+        event_class = self.planner_event_class_var.get().strip()
+        if not todo_date or not title:
+            return
+
+        self.state.planner_items.append({
+            "Type": "Event",
+            "TodoDate": todo_date,
+            "Class": event_class,
+            "Title": title,
+        })
+        save_planner_items(self.state.planner_items)
+        self.planner_event_title_var.set("")
+        self.refresh_tables()
 
     # -------------------------
     # Right-click menu actions
@@ -358,6 +450,8 @@ class ActionHandlers:
         save_data(self.state.data)
 
     def on_right_click_any(self, tree: ttk.Treeview, event: Any) -> None:
+        if tree == self.table_planner:
+            return
         iid = tree.identify_row(event.y)
         if not iid:
             return

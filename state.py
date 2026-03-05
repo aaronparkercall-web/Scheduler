@@ -6,6 +6,7 @@ import copy as _copy
 
 JSON_FILE = "assignments.json"
 SETTINGS_FILE = "settings.json"
+PLANNER_FILE = "planner.json"
 
 DEFAULT_SETTINGS: dict[str, Any] = {
     "colors": {
@@ -31,6 +32,7 @@ COLUMNS_FLAGGED = ["Date", "Time", "Class", "Assignment", "Note", "Complete"]
 class AppState:
     data: list[dict[str, Any]] = field(default_factory=list)
     settings: dict[str, Any] = field(default_factory=lambda: _copy.deepcopy(DEFAULT_SETTINGS))
+    planner_items: list[dict[str, Any]] = field(default_factory=list)
 
     undo_stack: list[list[dict[str, Any]]] = field(default_factory=list)
     undo_max: int = 50
