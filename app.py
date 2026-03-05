@@ -49,6 +49,7 @@ def _serialize_planner(item: dict, idx: int) -> dict:
         "TodoTime": item.get("TodoTime", ""),
         "Class": item.get("Class", ""),
         "Title": item.get("Title", ""),
+        "AssignmentId": item.get("AssignmentId"),
     }
 
 
@@ -115,15 +116,30 @@ class SchedulerHandler(BaseHTTPRequestHandler):
 
             if path == "/api/planner":
                 planner = load_planner_items()
+                item_type = payload.get("Type", "Event").strip() or "Event"
                 todo_dt = parse_planner_datetime(payload["TodoDate"], payload["TodoTime"])
+                class_name = payload.get("Class", "").strip()
+                title = payload.get("Title", "").strip()
+                assignment_id = payload.get("AssignmentId")
+
+                if item_type == "Assignment":
+                    if assignment_id is None:
+                        raise ValueError("Select an assignment to add to the planner")
+                    assignments = load_data()
+                    assignment_id = int(assignment_id)
+                    assignment = assignments[assignment_id]
+                    class_name = assignment.get("Class", "")
+                    title = assignment.get("Assignment", "")
+
                 planner.append(
                     {
-                        "Type": payload.get("Type", "Event"),
+                        "Type": item_type,
                         "TodoDate": payload["TodoDate"].strip(),
                         "TodoTime": todo_dt.strftime("%I:%M %p"),
                         "TodoDateTime": todo_dt.strftime("%Y/%m/%d %H:%M"),
-                        "Class": payload.get("Class", "").strip(),
-                        "Title": payload.get("Title", "").strip(),
+                        "Class": class_name,
+                        "Title": title,
+                        "AssignmentId": assignment_id if item_type == "Assignment" else None,
                     }
                 )
                 save_planner_items(planner)
@@ -280,7 +296,11 @@ INDEX_HTML = """
     </div>
     <div class="card hidden" id="plannerFormSection">
       <h3>Add Planner Item</h3>
-      <select id="ptype"><option>Assignment</option><option>Event</option></select>
+      <select id="ptype" onchange="togglePlannerTypeFields()"><option>Assignment</option><option>Event</option></select>
+      <div id="assignmentPickerWrap">
+        <input id="passignment" list="assignmentOptions" placeholder="Search assignment to add" />
+        <datalist id="assignmentOptions"></datalist>
+      </div>
       <input id="ptitle" placeholder="Title" />
       <input id="pclass" placeholder="Class (optional)" />
       <input id="pdate" placeholder="TODO date MM/DD" />
@@ -348,11 +368,41 @@ INDEX_HTML = """
   async function toggle(id, field){ await api(`/api/assignments/${id}/toggle`, {method:'POST', body:JSON.stringify({field})}); await refresh(); }
   async function delAssignment(id){ if(confirm('Delete assignment?')){ await api(`/api/assignments/${id}`, {method:'DELETE'}); await refresh(); } }
 
+  function togglePlannerTypeFields(){
+    const isAssignment = val('ptype') === 'Assignment';
+    document.getElementById('assignmentPickerWrap').classList.toggle('hidden', !isAssignment);
+    document.getElementById('ptitle').classList.toggle('hidden', isAssignment);
+    document.getElementById('pclass').classList.toggle('hidden', isAssignment);
+  }
+
+  function refreshPlannerAssignmentOptions(){
+    const list = document.getElementById('assignmentOptions');
+    list.innerHTML = '';
+    currentAssignments.forEach(a => {
+      const option = document.createElement('option');
+      option.value = `[${a.id}] ${a.Assignment}`;
+      option.label = `${a.Class ? `${a.Class} - ` : ''}${a.Assignment}`;
+      list.appendChild(option);
+    });
+  }
+
+  function selectedPlannerAssignmentId(){
+    const match = val('passignment').match(/^\[(\d+)\]/);
+    return match ? Number(match[1]) : null;
+  }
+
   async function addPlanner(){
-    const payload={Type:val('ptype'), Title:val('ptitle'), Class:val('pclass'), TodoDate:val('pdate'), TodoTime:val('ptime')};
+    const type = val('ptype');
+    const payload={Type:type, TodoDate:val('pdate'), TodoTime:val('ptime')};
+    if(type === 'Assignment'){
+      payload.AssignmentId = selectedPlannerAssignmentId();
+    } else {
+      payload.Title = val('ptitle');
+      payload.Class = val('pclass');
+    }
     const out = await api('/api/planner',{method:'POST',body:JSON.stringify(payload)});
     if(out.error){alert(out.error);return;}
-    ['ptitle','pclass','pdate','ptime'].forEach(id=>document.getElementById(id).value='');
+    ['passignment','ptitle','pclass','pdate','ptime'].forEach(id=>document.getElementById(id).value='');
     await refresh();
   }
   async function delPlanner(id){ await api(`/api/planner/${id}`,{method:'DELETE'}); await refresh(); }
@@ -463,6 +513,8 @@ INDEX_HTML = """
   async function refresh(){
     const assignments = await api('/api/assignments');
     currentAssignments = assignments;
+    refreshPlannerAssignmentOptions();
+    togglePlannerTypeFields();
     renderTabs(assignments);
     renderTables();
 
