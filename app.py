@@ -32,7 +32,7 @@ def main() -> None:
     style.configure("SectionTitle.TLabel", font=("Segoe UI", 12, "bold"))
     style.configure("BoldLabel.TLabel", font=("Segoe UI", 9, "bold"))
     style.configure("SidebarTitle.TLabel", font=("Segoe UI", 18, "bold"))
-    style.configure("SidebarText.TLabel", font=("Segoe UI", 10))
+    style.configure("BoldLabel2.TLabel", font=("Segoe UI", 10))
 
     # State
     state = AppState()
@@ -49,18 +49,18 @@ def main() -> None:
     sidebar.pack(side="left", fill="y", padx=(0, 12))
 
     ttk.Label(sidebar, text="Scheduler", style="SidebarTitle.TLabel").pack(anchor="w", pady=(0, 4))
-    ttk.Label(sidebar, text="Plan and track all class work in one place.", style="SidebarText.TLabel").pack(anchor="w", pady=(0, 20))
+    ttk.Label(sidebar, text="Plan and track all class work in one place.", style="BoldLabel2.TLabel").pack(anchor="w", pady=(0, 20))
 
     ttk.Label(sidebar, text="Workspace", style="SectionTitle.TLabel").pack(anchor="w", pady=(0, 8))
-    ttk.Label(sidebar, text="• All Assignments", style="SidebarText.TLabel").pack(anchor="w", pady=2)
-    ttk.Label(sidebar, text="• Flagged", style="SidebarText.TLabel").pack(anchor="w", pady=2)
-    ttk.Label(sidebar, text="• Planner", style="SidebarText.TLabel").pack(anchor="w", pady=2)
-    ttk.Label(sidebar, text="• Settings", style="SidebarText.TLabel").pack(anchor="w", pady=(2, 18))
+    ttk.Label(sidebar, text="• All Assignments", style="BoldLabel2.TLabel").pack(anchor="w", pady=2)
+    ttk.Label(sidebar, text="• Flagged", style="BoldLabel2.TLabel").pack(anchor="w", pady=2)
+    ttk.Label(sidebar, text="• Planner", style="BoldLabel2.TLabel").pack(anchor="w", pady=2)
+    ttk.Label(sidebar, text="• Settings", style="BoldLabel2.TLabel").pack(anchor="w", pady=(2, 18))
 
     quick_card = ttk.Labelframe(sidebar, text="Tips", padding=(12, 12), bootstyle="info")
     quick_card.pack(fill="x", pady=(0, 12))
-    ttk.Label(quick_card, text="Right-click rows to flag and add notes.", style="SidebarText.TLabel", wraplength=210).pack(anchor="w", pady=(0, 8))
-    ttk.Label(quick_card, text="Use Ctrl+Z to undo the last change.", style="SidebarText.TLabel", wraplength=210).pack(anchor="w")
+    ttk.Label(quick_card, text="Right-click rows to flag and add notes.", style="BoldLabel2.TLabel", wraplength=210).pack(anchor="w", pady=(0, 8))
+    ttk.Label(quick_card, text="Use Ctrl+Z to undo the last change.", style="BoldLabel2.TLabel", wraplength=210).pack(anchor="w")
 
     main_area = ttk.Frame(root)
     main_area.pack(side="left", fill="both", expand=True)

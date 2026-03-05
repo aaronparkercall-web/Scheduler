@@ -1815,7 +1815,7 @@
         "Score": "",
         "MaxPoints": "",
         "Grade": "",
-        "Complete": false,
+        "Complete": true,
         "Flagged": false,
         "Note": ""
     },
@@ -3293,19 +3293,6 @@
         "Date": "04/22",
         "Time": "08:00 PM",
         "Class": "LINEAR ALGEBRA",
-        "Assignment": "FINAL",
-        "Score": "",
-        "MaxPoints": "",
-        "Grade": "",
-        "Complete": false,
-        "Flagged": false,
-        "Note": ""
-    },
-    {
-        "datetime": "2026/04/22 20:00",
-        "Date": "04/22",
-        "Time": "08:00 PM",
-        "Class": "BIOLOGY",
         "Assignment": "FINAL",
         "Score": "",
         "MaxPoints": "",
