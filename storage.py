@@ -67,9 +67,23 @@ def load_planner_items(planner_file: str = PLANNER_FILE) -> list[dict[str, Any]]
 
     out: list[dict[str, Any]] = []
     for item in loaded:
+        todo_date = item.get("TodoDate", "")
+        todo_time = item.get("TodoTime", "")
+        todo_dt = item.get("TodoDateTime", "")
+
+        if todo_dt:
+            try:
+                parsed = datetime.strptime(todo_dt, "%Y/%m/%d %H:%M")
+                todo_date = parsed.strftime("%m/%d")
+                todo_time = parsed.strftime("%I:%M %p")
+            except Exception:
+                pass
+
         out.append({
             "Type": item.get("Type", "Assignment"),
-            "TodoDate": item.get("TodoDate", ""),
+            "TodoDate": todo_date,
+            "TodoTime": todo_time,
+            "TodoDateTime": todo_dt,
             "Class": item.get("Class", ""),
             "Title": item.get("Title", ""),
         })

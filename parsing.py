@@ -13,6 +13,18 @@ def parse_mmdd_to_datetime(date_mmdd: str, time_hhmm_24: str) -> datetime:
     return datetime.strptime(f"{year} {date_mmdd} {time_hhmm_24}", "%Y %m/%d %H:%M")
 
 
+
+
+
+def parse_planner_datetime(date_mmdd: str, time_hhmm_24: str) -> datetime:
+    date_text = (date_mmdd or "").strip()
+    time_text = (time_hhmm_24 or "").strip()
+    if not date_text:
+        raise ValueError("TODO date is required.")
+    if not time_text:
+        raise ValueError("TODO time is required.")
+    return parse_mmdd_to_datetime(date_text, time_text)
+
 def format_percent(pct: float) -> str:
     if abs(pct - round(pct)) < 1e-9:
         return f"{int(round(pct))}%"

@@ -94,14 +94,16 @@ def build_main_tables(
 
 
 def build_planner_table(tab_planner: ttk.Frame) -> ttk.Treeview:
-    columns = ["Type", "TODO Date", "Class", "Item"]
+    columns = ["Type", "TODO Date", "TODO Time", "Class", "Item"]
     table_planner = ttk.Treeview(tab_planner, columns=columns, show="headings", selectmode="extended")
     for col in columns:
         table_planner.heading(col, text=col, anchor="w")
         width = 140
         if col == "Item":
-            width = 520
+            width = 420
         if col == "TODO Date":
+            width = 120
+        if col == "TODO Time":
             width = 120
         table_planner.column(col, anchor="w", width=width)
     table_planner.pack(fill="both", expand=True)
@@ -229,13 +231,40 @@ def fill_flagged_table(state: AppState, table_flagged: ttk.Treeview) -> None:
         )
 
 
+def planner_sort_key(item: dict[str, Any]) -> datetime:
+    todo_dt = item.get("TodoDateTime", "")
+    if todo_dt:
+        try:
+            return datetime.strptime(todo_dt, "%Y/%m/%d %H:%M")
+        except Exception:
+            pass
+
+    todo_date = item.get("TodoDate", "")
+    todo_time = item.get("TodoTime", "")
+    if todo_date and todo_time:
+        try:
+            year = datetime.now().year
+            return datetime.strptime(f"{year} {todo_date} {todo_time}", "%Y %m/%d %I:%M %p")
+        except Exception:
+            pass
+
+    if todo_date:
+        try:
+            year = datetime.now().year
+            return datetime.strptime(f"{year} {todo_date} 23:59", "%Y %m/%d %H:%M")
+        except Exception:
+            pass
+
+    return datetime.max
+
+
 def fill_planner_table(state: AppState, table_planner: ttk.Treeview) -> None:
     for row in table_planner.get_children():
         table_planner.delete(row)
 
     sorted_items = sorted(
         enumerate(state.planner_items),
-        key=lambda x: x[1].get("TodoDate", ""),
+        key=lambda x: planner_sort_key(x[1]),
     )
 
     for i, (idx, item) in enumerate(sorted_items):
@@ -245,6 +274,7 @@ def fill_planner_table(state: AppState, table_planner: ttk.Treeview) -> None:
             values=(
                 item.get("Type", ""),
                 item.get("TodoDate", ""),
+                item.get("TodoTime", ""),
                 item.get("Class", ""),
                 item.get("Title", ""),
             ),
