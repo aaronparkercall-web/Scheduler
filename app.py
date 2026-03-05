@@ -262,7 +262,7 @@ INDEX_HTML = """
   </div>
 
   <div class="grid" id="formsGrid">
-    <div class="card">
+    <div class="card" id="assignmentFormSection">
       <h3>Add / Update Assignment</h3>
       <input id="date" placeholder="Date MM/DD" />
       <input id="time" placeholder="Time HH:MM (24h)" />
@@ -431,7 +431,8 @@ INDEX_HTML = """
     document.getElementById('plannerFormSection').classList.toggle('hidden', !onPlanner);
     document.getElementById('plannerSection').classList.toggle('hidden', !onPlanner);
     document.getElementById('settingsSection').classList.toggle('hidden', !onSettings);
-    document.getElementById('formsGrid').classList.toggle('hidden', onPlanner || onSettings);
+    document.getElementById('formsGrid').classList.toggle('hidden', onSettings);
+    document.getElementById('assignmentFormSection').classList.toggle('hidden', onPlanner || onSettings);
     document.getElementById('assignmentsSection').classList.toggle('hidden', onPlanner || onSettings);
   }
 
