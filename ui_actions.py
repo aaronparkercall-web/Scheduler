@@ -9,7 +9,7 @@ from tkinter import filedialog, simpledialog
 import ttkbootstrap as ttk
 
 from state import AppState
-from parsing import parse_mmdd_to_datetime, compute_displays_from_inputs, fraction_denominator_if_present
+from parsing import parse_mmdd_to_datetime, compute_displays_from_inputs
 from storage import save_data
 from ui_tables import refresh_tables as refresh_tables_full
 
@@ -59,8 +59,6 @@ class ActionHandlers:
         self.menu.add_separator()
         self.menu.add_command(label="Add/Edit Note…", command=lambda: self.edit_note_for_selection(self.active_treeview()))
         self.menu.add_command(label="Clear Note", command=lambda: self.clear_note_for_selection(self.active_treeview()))
-
-        self._wire_autofill_denominators()
 
     # -------------------------
     # Undo
@@ -144,22 +142,6 @@ class ActionHandlers:
         if iid not in tree.selection():
             tree.selection_set(iid)
             tree.focus(iid)
-
-    # -------------------------
-    # Auto-fill MaxPoints from fractions (Score or Grade)
-    # -------------------------
-    def _wire_autofill_denominators(self) -> None:
-        def on_change(*_args: Any) -> None:
-            denom = fraction_denominator_if_present(self.score_var.get())
-            if denom is None:
-                denom = fraction_denominator_if_present(self.grade_var.get())
-            if denom is None:
-                return
-            if self.max_points_var.get().strip() != denom:
-                self.max_points_var.set(denom)
-
-        self.score_var.trace_add("write", on_change)
-        self.grade_var.trace_add("write", on_change)
 
     # -------------------------
     # Core actions
