@@ -9,7 +9,7 @@ from tkinter import filedialog, simpledialog
 import ttkbootstrap as ttk
 
 from state import AppState
-from parsing import parse_mmdd_to_datetime, compute_displays_from_inputs
+from parsing import parse_mmdd_to_datetime, parse_planner_datetime, compute_displays_from_inputs
 from storage import save_data, save_planner_items
 from ui_tables import refresh_tables as refresh_tables_full
 
@@ -38,6 +38,7 @@ class ActionHandlers:
         max_points_var: ttk.StringVar,
         planner_assignment_var: ttk.StringVar,
         planner_todo_date_var: ttk.StringVar,
+        planner_todo_time_var: ttk.StringVar,
         planner_event_title_var: ttk.StringVar,
         planner_event_class_var: ttk.StringVar,
     ) -> None:
@@ -62,6 +63,7 @@ class ActionHandlers:
         self.max_points_var = max_points_var
         self.planner_assignment_var = planner_assignment_var
         self.planner_todo_date_var = planner_todo_date_var
+        self.planner_todo_time_var = planner_todo_time_var
         self.planner_event_title_var = planner_event_title_var
         self.planner_event_class_var = planner_event_class_var
 
@@ -346,7 +348,14 @@ class ActionHandlers:
     def add_assignment_to_planner_from_dropdown(self) -> None:
         selected_label = self.planner_assignment_var.get().strip()
         todo_date = self.planner_todo_date_var.get().strip()
-        if not selected_label or not todo_date:
+        todo_time = self.planner_todo_time_var.get().strip()
+        if not selected_label or not todo_date or not todo_time:
+            return
+
+        try:
+            todo_dt = parse_planner_datetime(todo_date, todo_time)
+        except ValueError as e:
+            print(f"Invalid planner input: {e}")
             return
 
         for item in sorted(self.state.data, key=lambda x: x["datetime"]):
@@ -354,7 +363,9 @@ class ActionHandlers:
             if label == selected_label:
                 self.state.planner_items.append({
                     "Type": "Assignment",
-                    "TodoDate": todo_date,
+                    "TodoDate": todo_dt.strftime("%m/%d"),
+                    "TodoTime": todo_dt.strftime("%I:%M %p"),
+                    "TodoDateTime": todo_dt.strftime("%Y/%m/%d %H:%M"),
                     "Class": item.get("Class", ""),
                     "Title": item.get("Assignment", ""),
                 })
@@ -373,12 +384,24 @@ class ActionHandlers:
         if not todo_date:
             return
 
+        todo_time = simpledialog.askstring("Add to Planner", "Enter TODO time (HH:MM 24hr):")
+        if not todo_time:
+            return
+
+        try:
+            todo_dt = parse_planner_datetime(todo_date, todo_time)
+        except ValueError as e:
+            print(f"Invalid planner input: {e}")
+            return
+
         for iid in sel:
             idx = int(iid)
             item = self.state.data[idx]
             self.state.planner_items.append({
                 "Type": "Assignment",
-                "TodoDate": todo_date,
+                "TodoDate": todo_dt.strftime("%m/%d"),
+                "TodoTime": todo_dt.strftime("%I:%M %p"),
+                "TodoDateTime": todo_dt.strftime("%Y/%m/%d %H:%M"),
                 "Class": item.get("Class", ""),
                 "Title": item.get("Assignment", ""),
             })
@@ -388,14 +411,23 @@ class ActionHandlers:
 
     def add_event_to_planner(self) -> None:
         todo_date = self.planner_todo_date_var.get().strip()
+        todo_time = self.planner_todo_time_var.get().strip()
         title = self.planner_event_title_var.get().strip()
         event_class = self.planner_event_class_var.get().strip()
-        if not todo_date or not title:
+        if not todo_date or not todo_time or not title:
+            return
+
+        try:
+            todo_dt = parse_planner_datetime(todo_date, todo_time)
+        except ValueError as e:
+            print(f"Invalid planner input: {e}")
             return
 
         self.state.planner_items.append({
             "Type": "Event",
-            "TodoDate": todo_date,
+            "TodoDate": todo_dt.strftime("%m/%d"),
+            "TodoTime": todo_dt.strftime("%I:%M %p"),
+            "TodoDateTime": todo_dt.strftime("%Y/%m/%d %H:%M"),
             "Class": event_class,
             "Title": title,
         })

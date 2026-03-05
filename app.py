@@ -65,6 +65,7 @@ def main() -> None:
     max_points_var = ttk.StringVar()
     planner_assignment_var = ttk.StringVar()
     planner_todo_date_var = ttk.StringVar()
+    planner_todo_time_var = ttk.StringVar()
     planner_event_title_var = ttk.StringVar()
     planner_event_class_var = ttk.StringVar()
 
@@ -119,8 +120,11 @@ def main() -> None:
     ttk.Label(planner_controls, text="TODO Date (MM/DD)", style="BoldLabel.TLabel").grid(row=0, column=1, sticky="w", padx=4)
     ttk.Entry(planner_controls, textvariable=planner_todo_date_var, width=14).grid(row=1, column=1, padx=4, pady=(3, 0), sticky="ew")
 
+    ttk.Label(planner_controls, text="TODO Time (HH:MM 24hr)", style="BoldLabel.TLabel").grid(row=0, column=2, sticky="w", padx=4)
+    ttk.Entry(planner_controls, textvariable=planner_todo_time_var, width=14).grid(row=1, column=2, padx=4, pady=(3, 0), sticky="ew")
+
     add_planner_assignment_btn = ttk.Button(planner_controls, text="Add Assignment to TODO", bootstyle="primary")
-    add_planner_assignment_btn.grid(row=1, column=2, padx=4, pady=(3, 0), sticky="ew")
+    add_planner_assignment_btn.grid(row=1, column=3, padx=4, pady=(3, 0), sticky="ew")
 
     ttk.Label(planner_controls, text="Event Title", style="BoldLabel.TLabel").grid(row=2, column=0, sticky="w", padx=4, pady=(10, 0))
     ttk.Entry(planner_controls, textvariable=planner_event_title_var).grid(row=3, column=0, padx=4, pady=(3, 0), sticky="ew")
@@ -129,9 +133,9 @@ def main() -> None:
     ttk.Entry(planner_controls, textvariable=planner_event_class_var, width=16).grid(row=3, column=1, padx=4, pady=(3, 0), sticky="ew")
 
     add_planner_event_btn = ttk.Button(planner_controls, text="Add Event", bootstyle="success")
-    add_planner_event_btn.grid(row=3, column=2, padx=4, pady=(3, 0), sticky="ew")
+    add_planner_event_btn.grid(row=3, column=3, padx=4, pady=(3, 0), sticky="ew")
 
-    for col in range(3):
+    for col in range(4):
         planner_controls.columnconfigure(col, weight=1)
 
     table_planner = build_planner_table(tab_planner)
@@ -158,6 +162,7 @@ def main() -> None:
         max_points_var=max_points_var,
         planner_assignment_var=planner_assignment_var,
         planner_todo_date_var=planner_todo_date_var,
+        planner_todo_time_var=planner_todo_time_var,
         planner_event_title_var=planner_event_title_var,
         planner_event_class_var=planner_event_class_var,
     )
