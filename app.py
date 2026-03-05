@@ -75,13 +75,13 @@ def main() -> None:
     ttk.Label(input_frame, text="Assignment", style="BoldLabel.TLabel").grid(row=0, column=3, padx=5, sticky="w")
     ttk.Entry(input_frame, width=22, textvariable=assignment_var).grid(row=1, column=3, padx=5, pady=(3, 0), sticky="ew")
 
-    ttk.Label(input_frame, text="Score (18 or 18/20)", style="BoldLabel.TLabel").grid(row=0, column=4, padx=5, sticky="w")
+    ttk.Label(input_frame, text="Score (optional)", style="BoldLabel.TLabel").grid(row=0, column=4, padx=5, sticky="w")
     ttk.Entry(input_frame, width=14, textvariable=score_var).grid(row=1, column=4, padx=5, pady=(3, 0), sticky="ew")
 
-    ttk.Label(input_frame, text="Grade (90 or 90%)", style="BoldLabel.TLabel").grid(row=0, column=5, padx=5, sticky="w")
+    ttk.Label(input_frame, text="Grade (optional)", style="BoldLabel.TLabel").grid(row=0, column=5, padx=5, sticky="w")
     ttk.Entry(input_frame, width=14, textvariable=grade_var).grid(row=1, column=5, padx=5, pady=(3, 0), sticky="ew")
 
-    ttk.Label(input_frame, text="Max Points", style="BoldLabel.TLabel").grid(row=0, column=6, padx=5, sticky="w")
+    ttk.Label(input_frame, text="Max Points (optional)", style="BoldLabel.TLabel").grid(row=0, column=6, padx=5, sticky="w")
     ttk.Entry(input_frame, width=12, textvariable=max_points_var).grid(row=1, column=6, padx=5, pady=(3, 0), sticky="ew")
 
     for col in range(8):
