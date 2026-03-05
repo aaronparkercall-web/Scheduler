@@ -2,7 +2,7 @@
     {
         "datetime": "2026/01/08 14:00",
         "Date": "01/08",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 1",
         "Score": "9.5/9",
@@ -15,7 +15,7 @@
     {
         "datetime": "2026/01/08 23:59",
         "Date": "01/08",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 1.1",
         "Score": "10/10",
@@ -28,7 +28,7 @@
     {
         "datetime": "2026/01/10 23:59",
         "Date": "01/10",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 1",
         "Score": "26/26",
@@ -41,7 +41,7 @@
     {
         "datetime": "2026/01/12 17:59",
         "Date": "01/12",
-        "Time": "05:59 PM",
+        "Time": "17:59",
         "Class": "BIOLOGY",
         "Assignment": "Personal Introduction",
         "Score": "5/5",
@@ -54,7 +54,7 @@
     {
         "datetime": "2026/01/12 23:59",
         "Date": "01/12",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 1",
         "Score": "10/10",
@@ -67,7 +67,7 @@
     {
         "datetime": "2026/01/12 23:59",
         "Date": "01/12",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 2",
         "Score": "10/10",
@@ -80,7 +80,7 @@
     {
         "datetime": "2026/01/13 11:59",
         "Date": "01/13",
-        "Time": "11:59 AM",
+        "Time": "11:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 1.1",
         "Score": "9/10",
@@ -93,7 +93,7 @@
     {
         "datetime": "2026/01/13 14:00",
         "Date": "01/13",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 2",
         "Score": "7.5/7",
@@ -106,7 +106,7 @@
     {
         "datetime": "2026/01/13 23:59",
         "Date": "01/13",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "#1 - Community of Learners",
         "Score": "4/4",
@@ -119,7 +119,7 @@
     {
         "datetime": "2026/01/13 23:59",
         "Date": "01/13",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 1.2",
         "Score": "15/15",
@@ -132,7 +132,7 @@
     {
         "datetime": "2026/01/14 23:59",
         "Date": "01/14",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 2",
         "Score": "26/26",
@@ -145,7 +145,7 @@
     {
         "datetime": "2026/01/15 11:00",
         "Date": "01/15",
-        "Time": "11:00 AM",
+        "Time": "11:00",
         "Class": "BIOLOGY",
         "Assignment": "Lab 1",
         "Score": "1/1",
@@ -158,7 +158,7 @@
     {
         "datetime": "2026/01/15 14:00",
         "Date": "01/15",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 3",
         "Score": "8.5/8",
@@ -171,7 +171,7 @@
     {
         "datetime": "2026/01/15 23:59",
         "Date": "01/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 1.2",
         "Score": "10/10",
@@ -184,7 +184,7 @@
     {
         "datetime": "2026/01/15 23:59",
         "Date": "01/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 1.3",
         "Score": "8/8",
@@ -197,7 +197,7 @@
     {
         "datetime": "2026/01/16 23:59",
         "Date": "01/16",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "1. Quiz on Hesiod",
         "Score": "10/10",
@@ -210,7 +210,7 @@
     {
         "datetime": "2026/01/16 23:59",
         "Date": "01/16",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 1.3",
         "Score": "9/10",
@@ -223,7 +223,7 @@
     {
         "datetime": "2026/01/17 05:00",
         "Date": "01/17",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 1",
         "Score": "",
@@ -236,7 +236,7 @@
     {
         "datetime": "2026/01/17 23:59",
         "Date": "01/17",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 3",
         "Score": "26/26",
@@ -249,7 +249,7 @@
     {
         "datetime": "2026/01/17 23:59",
         "Date": "01/17",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reflection 1",
         "Score": "25/25",
@@ -262,7 +262,7 @@
     {
         "datetime": "2026/01/17 23:59",
         "Date": "01/17",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Family Group Record (In-Class)",
         "Score": "25/25",
@@ -275,7 +275,7 @@
     {
         "datetime": "2026/01/19 22:50",
         "Date": "01/19",
-        "Time": "10:50 PM",
+        "Time": "22:50",
         "Class": "BIOLOGY",
         "Assignment": "Lab 1 Homework",
         "Score": "14.9/15",
@@ -288,7 +288,7 @@
     {
         "datetime": "2026/01/19 23:59",
         "Date": "01/19",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 2 Quiz",
         "Score": "10/10",
@@ -301,7 +301,7 @@
     {
         "datetime": "2026/01/20 10:50",
         "Date": "01/20",
-        "Time": "10:50 AM",
+        "Time": "10:50",
         "Class": "BIOLOGY",
         "Assignment": "Safety Awareness Training",
         "Score": "1/1",
@@ -314,7 +314,7 @@
     {
         "datetime": "2026/01/20 14:00",
         "Date": "01/20",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 4",
         "Score": "7.5/7",
@@ -327,7 +327,7 @@
     {
         "datetime": "2026/01/20 23:59",
         "Date": "01/20",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 2.1",
         "Score": "7/7",
@@ -340,7 +340,7 @@
     {
         "datetime": "2026/01/20 23:59",
         "Date": "01/20",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 2.2a",
         "Score": "8/8",
@@ -353,7 +353,7 @@
     {
         "datetime": "2026/01/20 23:59",
         "Date": "01/20",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "#2 - Community of Learners",
         "Score": "4/4",
@@ -366,7 +366,7 @@
     {
         "datetime": "2026/01/20 23:59",
         "Date": "01/20",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "EXAM 1.1 IN CLASS",
         "Score": "48/48",
@@ -379,7 +379,7 @@
     {
         "datetime": "2026/01/20 23:59",
         "Date": "01/20",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "EXAM 1.2 IN CLASS GROUP",
         "Score": "48/48",
@@ -392,7 +392,7 @@
     {
         "datetime": "2026/01/21 23:59",
         "Date": "01/21",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 4",
         "Score": "15/15",
@@ -405,7 +405,7 @@
     {
         "datetime": "2026/01/21 23:59",
         "Date": "01/21",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 3",
         "Score": "10/10",
@@ -418,7 +418,7 @@
     {
         "datetime": "2026/01/22 10:50",
         "Date": "01/22",
-        "Time": "10:50 AM",
+        "Time": "10:50",
         "Class": "BIOLOGY",
         "Assignment": "Lab 2",
         "Score": "1/1",
@@ -431,7 +431,7 @@
     {
         "datetime": "2026/01/22 14:00",
         "Date": "01/22",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 5",
         "Score": "9/9",
@@ -444,7 +444,7 @@
     {
         "datetime": "2026/01/22 23:59",
         "Date": "01/22",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 2.1",
         "Score": "10/10",
@@ -457,7 +457,7 @@
     {
         "datetime": "2026/01/22 23:59",
         "Date": "01/22",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 2.2a",
         "Score": "10/10",
@@ -470,7 +470,7 @@
     {
         "datetime": "2026/01/23 23:59",
         "Date": "01/23",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "2. Quiz on the Presocratics",
         "Score": "10/10",
@@ -483,7 +483,7 @@
     {
         "datetime": "2026/01/24 05:00",
         "Date": "01/24",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 2",
         "Score": "",
@@ -496,7 +496,7 @@
     {
         "datetime": "2026/01/24 23:59",
         "Date": "01/24",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 5",
         "Score": "26/26",
@@ -509,7 +509,7 @@
     {
         "datetime": "2026/01/24 23:59",
         "Date": "01/24",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reflection 2",
         "Score": "25/25",
@@ -522,7 +522,7 @@
     {
         "datetime": "2026/01/24 23:59",
         "Date": "01/24",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Topic Exercises 2 (In-Class)",
         "Score": "50/50",
@@ -535,7 +535,7 @@
     {
         "datetime": "2026/01/25 23:59",
         "Date": "01/25",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 2.2b",
         "Score": "17/17",
@@ -548,7 +548,7 @@
     {
         "datetime": "2026/01/26 23:00",
         "Date": "01/26",
-        "Time": "11:00 PM",
+        "Time": "23:00",
         "Class": "BIOLOGY",
         "Assignment": "Lab 2 Homework",
         "Score": "15/15",
@@ -561,7 +561,7 @@
     {
         "datetime": "2026/01/26 23:59",
         "Date": "01/26",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 3 Quiz",
         "Score": "9.5/10",
@@ -574,7 +574,7 @@
     {
         "datetime": "2026/01/26 23:59",
         "Date": "01/26",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 4",
         "Score": "10/10",
@@ -587,7 +587,7 @@
     {
         "datetime": "2026/01/27 12:30",
         "Date": "01/27",
-        "Time": "12:30 PM",
+        "Time": "12:30",
         "Class": "BIOLOGY",
         "Assignment": "Photosynthesis/Cellular Respiration Homework",
         "Score": "20/20",
@@ -600,7 +600,7 @@
     {
         "datetime": "2026/01/27 14:00",
         "Date": "01/27",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 6",
         "Score": "9/9",
@@ -613,7 +613,7 @@
     {
         "datetime": "2026/01/27 23:59",
         "Date": "01/27",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 2.2b",
         "Score": "10/10",
@@ -626,7 +626,7 @@
     {
         "datetime": "2026/01/27 23:59",
         "Date": "01/27",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 2.3a",
         "Score": "9/9",
@@ -639,7 +639,7 @@
     {
         "datetime": "2026/01/27 23:59",
         "Date": "01/27",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "#3 - Community of Learners",
         "Score": "4/4",
@@ -652,7 +652,7 @@
     {
         "datetime": "2026/01/28 23:59",
         "Date": "01/28",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 6",
         "Score": "26/26",
@@ -665,7 +665,7 @@
     {
         "datetime": "2026/01/29 10:50",
         "Date": "01/29",
-        "Time": "10:50 AM",
+        "Time": "10:50",
         "Class": "BIOLOGY",
         "Assignment": "Lab 3",
         "Score": "1/1",
@@ -678,7 +678,7 @@
     {
         "datetime": "2026/01/29 14:00",
         "Date": "01/29",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 7",
         "Score": "8/8",
@@ -691,7 +691,7 @@
     {
         "datetime": "2026/01/29 17:59",
         "Date": "01/29",
-        "Time": "05:59 PM",
+        "Time": "17:59",
         "Class": "BIOLOGY",
         "Assignment": "WTL: Your Inner Fish #1 CH. 1-4 Discussion",
         "Score": "5/5",
@@ -704,7 +704,7 @@
     {
         "datetime": "2026/01/29 23:59",
         "Date": "01/29",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 2.3a",
         "Score": "10/10",
@@ -717,7 +717,7 @@
     {
         "datetime": "2026/01/29 23:59",
         "Date": "01/29",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 2.3b",
         "Score": "6/6",
@@ -730,7 +730,7 @@
     {
         "datetime": "2026/01/30 21:00",
         "Date": "01/30",
-        "Time": "09:00 PM",
+        "Time": "21:00",
         "Class": "BIOLOGY",
         "Assignment": "EXAM 1",
         "Score": "95.5/110",
@@ -743,7 +743,7 @@
     {
         "datetime": "2026/01/31 05:00",
         "Date": "01/31",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 3",
         "Score": "",
@@ -756,7 +756,7 @@
     {
         "datetime": "2026/01/31 23:59",
         "Date": "01/31",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 7",
         "Score": "26/26",
@@ -769,7 +769,7 @@
     {
         "datetime": "2026/01/31 23:59",
         "Date": "01/31",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "3. Quiz on Socrates",
         "Score": "9/10",
@@ -782,7 +782,7 @@
     {
         "datetime": "2026/01/31 23:59",
         "Date": "01/31",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Aims in My Ancestry",
         "Score": "25/25",
@@ -795,7 +795,7 @@
     {
         "datetime": "2026/02/02 23:00",
         "Date": "02/02",
-        "Time": "11:00 PM",
+        "Time": "23:00",
         "Class": "BIOLOGY",
         "Assignment": "Lab 3 Homework",
         "Score": "15/15",
@@ -808,7 +808,7 @@
     {
         "datetime": "2026/02/02 23:59",
         "Date": "02/02",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 5",
         "Score": "10/10",
@@ -821,7 +821,7 @@
     {
         "datetime": "2026/02/02 23:59",
         "Date": "02/02",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "EXAM 2. TESTING CENTER",
         "Score": "102/102",
@@ -834,7 +834,7 @@
     {
         "datetime": "2026/02/03 14:00",
         "Date": "02/03",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 8",
         "Score": "11/11",
@@ -847,7 +847,7 @@
     {
         "datetime": "2026/02/03 23:59",
         "Date": "02/03",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 2.3b",
         "Score": "10/10",
@@ -860,7 +860,7 @@
     {
         "datetime": "2026/02/03 23:59",
         "Date": "02/03",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 3.1",
         "Score": "11/11",
@@ -873,7 +873,7 @@
     {
         "datetime": "2026/02/03 23:59",
         "Date": "02/03",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "#4 - Community of Learners",
         "Score": "4/4",
@@ -886,7 +886,7 @@
     {
         "datetime": "2026/02/03 23:59",
         "Date": "02/03",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 4 Quiz",
         "Score": "10/10",
@@ -899,7 +899,7 @@
     {
         "datetime": "2026/02/04 23:59",
         "Date": "02/04",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 8",
         "Score": "26/26",
@@ -912,7 +912,7 @@
     {
         "datetime": "2026/02/05 14:00",
         "Date": "02/05",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 9",
         "Score": "21/21",
@@ -925,7 +925,7 @@
     {
         "datetime": "2026/02/05 23:59",
         "Date": "02/05",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 3.1",
         "Score": "10/10",
@@ -938,7 +938,7 @@
     {
         "datetime": "2026/02/05 23:59",
         "Date": "02/05",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 3.2",
         "Score": "4/4",
@@ -951,7 +951,7 @@
     {
         "datetime": "2026/02/05 23:59",
         "Date": "02/05",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 3.3a",
         "Score": "4/4",
@@ -964,7 +964,7 @@
     {
         "datetime": "2026/02/05 23:59",
         "Date": "02/05",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 4",
         "Score": "1/1",
@@ -977,7 +977,7 @@
     {
         "datetime": "2026/02/06 23:59",
         "Date": "02/06",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "Summary of Plato's dialogue Phaedo",
         "Score": "18/20",
@@ -990,7 +990,7 @@
     {
         "datetime": "2026/02/07 05:00",
         "Date": "02/07",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 4",
         "Score": "",
@@ -1003,7 +1003,7 @@
     {
         "datetime": "2026/02/07 23:59",
         "Date": "02/07",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 9",
         "Score": "26/26",
@@ -1016,7 +1016,7 @@
     {
         "datetime": "2026/02/07 23:59",
         "Date": "02/07",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Topic Exercises 3 (In-Class)",
         "Score": "30/30",
@@ -1029,7 +1029,7 @@
     {
         "datetime": "2026/02/09 23:00",
         "Date": "02/09",
-        "Time": "11:00 PM",
+        "Time": "23:00",
         "Class": "BIOLOGY",
         "Assignment": "Lab 4 Homework",
         "Score": "15/15",
@@ -1042,7 +1042,7 @@
     {
         "datetime": "2026/02/09 23:59",
         "Date": "02/09",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "4. Quiz of Plato",
         "Score": "9/10",
@@ -1055,7 +1055,7 @@
     {
         "datetime": "2026/02/09 23:59",
         "Date": "02/09",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 5 Quiz",
         "Score": "8/10",
@@ -1068,7 +1068,7 @@
     {
         "datetime": "2026/02/09 23:59",
         "Date": "02/09",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 6",
         "Score": "10/10",
@@ -1081,7 +1081,7 @@
     {
         "datetime": "2026/02/10 14:00",
         "Date": "02/10",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 10",
         "Score": "9/9",
@@ -1094,7 +1094,7 @@
     {
         "datetime": "2026/02/10 23:59",
         "Date": "02/10",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 3.2",
         "Score": "9/10",
@@ -1107,7 +1107,7 @@
     {
         "datetime": "2026/02/10 23:59",
         "Date": "02/10",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 3.3a",
         "Score": "9/10",
@@ -1120,7 +1120,7 @@
     {
         "datetime": "2026/02/10 23:59",
         "Date": "02/10",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 3.3b",
         "Score": "8/8",
@@ -1133,7 +1133,7 @@
     {
         "datetime": "2026/02/10 23:59",
         "Date": "02/10",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "#5 - Community of Learners",
         "Score": "",
@@ -1146,7 +1146,7 @@
     {
         "datetime": "2026/02/11 23:59",
         "Date": "02/11",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 10",
         "Score": "26/26",
@@ -1159,7 +1159,7 @@
     {
         "datetime": "2026/02/12 12:50",
         "Date": "02/12",
-        "Time": "12:50 PM",
+        "Time": "12:50",
         "Class": "BIOLOGY",
         "Assignment": "Lab 5",
         "Score": "1/1",
@@ -1172,7 +1172,7 @@
     {
         "datetime": "2026/02/12 14:00",
         "Date": "02/12",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 11",
         "Score": "5/6",
@@ -1185,7 +1185,7 @@
     {
         "datetime": "2026/02/12 23:59",
         "Date": "02/12",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 3.3b",
         "Score": "10/10",
@@ -1198,7 +1198,7 @@
     {
         "datetime": "2026/02/12 23:59",
         "Date": "02/12",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Concept Map - Exam 1",
         "Score": "",
@@ -1211,7 +1211,7 @@
     {
         "datetime": "2026/02/14 05:00",
         "Date": "02/14",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 5",
         "Score": "",
@@ -1224,7 +1224,7 @@
     {
         "datetime": "2026/02/14 23:59",
         "Date": "02/14",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 11",
         "Score": "10/19",
@@ -1237,7 +1237,7 @@
     {
         "datetime": "2026/02/14 23:59",
         "Date": "02/14",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reflection 3",
         "Score": "25/25",
@@ -1250,7 +1250,7 @@
     {
         "datetime": "2026/02/14 23:59",
         "Date": "02/14",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Topic Exercises 5 (In-Class)",
         "Score": "30/30",
@@ -1263,7 +1263,7 @@
     {
         "datetime": "2026/02/16 23:00",
         "Date": "02/16",
-        "Time": "11:00 PM",
+        "Time": "23:00",
         "Class": "BIOLOGY",
         "Assignment": "Lab 5 Homework",
         "Score": "15/15",
@@ -1276,7 +1276,7 @@
     {
         "datetime": "2026/02/17 23:59",
         "Date": "02/17",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 3.5a",
         "Score": "30/30",
@@ -1289,7 +1289,7 @@
     {
         "datetime": "2026/02/17 23:59",
         "Date": "02/17",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "#6 - Community of Learners",
         "Score": "5/5",
@@ -1302,7 +1302,7 @@
     {
         "datetime": "2026/02/17 23:59",
         "Date": "02/17",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 7",
         "Score": "10/10",
@@ -1315,7 +1315,7 @@
     {
         "datetime": "2026/02/17 23:59",
         "Date": "02/17",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "FS Memories- Add a Photo",
         "Score": "25/25",
@@ -1328,7 +1328,7 @@
     {
         "datetime": "2026/02/18 23:59",
         "Date": "02/18",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "EXAM 3. ONLINE",
         "Score": "85/80",
@@ -1341,7 +1341,7 @@
     {
         "datetime": "2026/02/19 12:30",
         "Date": "02/19",
-        "Time": "12:30 PM",
+        "Time": "12:30",
         "Class": "BIOLOGY",
         "Assignment": "Genetics Homework",
         "Score": "30/30",
@@ -1354,7 +1354,7 @@
     {
         "datetime": "2026/02/19 14:00",
         "Date": "02/19",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 12",
         "Score": "10/10",
@@ -1367,7 +1367,7 @@
     {
         "datetime": "2026/02/19 17:59",
         "Date": "02/19",
-        "Time": "05:59 PM",
+        "Time": "17:59",
         "Class": "BIOLOGY",
         "Assignment": "WTL: Your Inner Fish #2 CH. 1-4 Discussion",
         "Score": "5/5",
@@ -1380,7 +1380,7 @@
     {
         "datetime": "2026/02/19 21:00",
         "Date": "02/19",
-        "Time": "09:00 PM",
+        "Time": "21:00",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "MIDTERM 1",
         "Score": "100/100",
@@ -1393,7 +1393,7 @@
     {
         "datetime": "2026/02/19 23:59",
         "Date": "02/19",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 3.5b",
         "Score": "12/12",
@@ -1406,7 +1406,7 @@
     {
         "datetime": "2026/02/20 23:59",
         "Date": "02/20",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "5. Quiz on Aristotle",
         "Score": "10/10",
@@ -1419,7 +1419,7 @@
     {
         "datetime": "2026/02/21 05:00",
         "Date": "02/21",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 6",
         "Score": "",
@@ -1432,7 +1432,7 @@
     {
         "datetime": "2026/02/21 23:59",
         "Date": "02/21",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 12",
         "Score": "",
@@ -1445,7 +1445,7 @@
     {
         "datetime": "2026/02/21 23:59",
         "Date": "02/21",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Family History Workshops Part 1",
         "Score": "",
@@ -1458,7 +1458,7 @@
     {
         "datetime": "2026/02/23 12:30",
         "Date": "02/23",
-        "Time": "12:30 PM",
+        "Time": "12:30",
         "Class": "BIOLOGY",
         "Assignment": "Transcription/Translation Poster",
         "Score": "20/20",
@@ -1471,7 +1471,7 @@
     {
         "datetime": "2026/02/23 23:59",
         "Date": "02/23",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 6 Quiz",
         "Score": "",
@@ -1484,7 +1484,7 @@
     {
         "datetime": "2026/02/23 23:59",
         "Date": "02/23",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 8",
         "Score": "8/10",
@@ -1497,7 +1497,7 @@
     {
         "datetime": "2026/02/24 14:00",
         "Date": "02/24",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 13",
         "Score": "10/10",
@@ -1510,7 +1510,7 @@
     {
         "datetime": "2026/02/24 23:59",
         "Date": "02/24",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 3.5a",
         "Score": "10/10",
@@ -1523,7 +1523,7 @@
     {
         "datetime": "2026/02/24 23:59",
         "Date": "02/24",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 3.5c",
         "Score": "30/30",
@@ -1536,7 +1536,7 @@
     {
         "datetime": "2026/02/24 23:59",
         "Date": "02/24",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "#7 - Community of Learners",
         "Score": "",
@@ -1549,7 +1549,7 @@
     {
         "datetime": "2026/02/25 23:59",
         "Date": "02/25",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 13",
         "Score": "",
@@ -1562,7 +1562,7 @@
     {
         "datetime": "2026/02/25 23:59",
         "Date": "02/25",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "Paper on Aristotle's ideas on the nature of science",
         "Score": "19/20",
@@ -1575,7 +1575,7 @@
     {
         "datetime": "2026/02/26 10:50",
         "Date": "02/26",
-        "Time": "10:50 AM",
+        "Time": "10:50",
         "Class": "BIOLOGY",
         "Assignment": "Lab 6",
         "Score": "1/1",
@@ -1588,7 +1588,7 @@
     {
         "datetime": "2026/02/26 14:00",
         "Date": "02/26",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 14",
         "Score": "9/10",
@@ -1601,7 +1601,7 @@
     {
         "datetime": "2026/02/26 23:59",
         "Date": "02/26",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 3.5b",
         "Score": "10/10",
@@ -1614,7 +1614,7 @@
     {
         "datetime": "2026/02/26 23:59",
         "Date": "02/26",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 3.6",
         "Score": "29/29",
@@ -1627,7 +1627,7 @@
     {
         "datetime": "2026/02/27 23:59",
         "Date": "02/27",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Extra Credit-Midcourse Eval",
         "Score": "10/0.7",
@@ -1640,7 +1640,7 @@
     {
         "datetime": "2026/02/28 05:00",
         "Date": "02/28",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 7",
         "Score": "",
@@ -1653,7 +1653,7 @@
     {
         "datetime": "2026/02/28 23:59",
         "Date": "02/28",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 14",
         "Score": "",
@@ -1666,7 +1666,7 @@
     {
         "datetime": "2026/02/28 23:59",
         "Date": "02/28",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Assignment 7A: Vital Records (In-Class)",
         "Score": "37/37",
@@ -1679,7 +1679,7 @@
     {
         "datetime": "2026/03/02 18:00",
         "Date": "03/02",
-        "Time": "06:00 PM",
+        "Time": "18:00",
         "Class": "BIOLOGY",
         "Assignment": "EXAM 2",
         "Score": "",
@@ -1692,7 +1692,7 @@
     {
         "datetime": "2026/03/02 23:00",
         "Date": "03/02",
-        "Time": "11:00 PM",
+        "Time": "23:00",
         "Class": "BIOLOGY",
         "Assignment": "Lab 6 Homework",
         "Score": "",
@@ -1705,7 +1705,7 @@
     {
         "datetime": "2026/03/02 23:59",
         "Date": "03/02",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 7 Quiz",
         "Score": "",
@@ -1718,7 +1718,7 @@
     {
         "datetime": "2026/03/02 23:59",
         "Date": "03/02",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 9",
         "Score": "10/10",
@@ -1744,7 +1744,7 @@
     {
         "datetime": "2026/03/03 23:59",
         "Date": "03/03",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 3.5c",
         "Score": "0/10",
@@ -1770,7 +1770,7 @@
     {
         "datetime": "2026/03/03 23:59",
         "Date": "03/03",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "#8 - Community of Learners",
         "Score": "4/4",
@@ -1783,7 +1783,7 @@
     {
         "datetime": "2026/03/03 23:59",
         "Date": "03/03",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "EXAM 4.1 IN CLASS",
         "Score": "48/48",
@@ -1796,7 +1796,7 @@
     {
         "datetime": "2026/03/03 23:59",
         "Date": "03/03",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "EXAM 4.2 IN CLASS GROUP",
         "Score": "48/48",
@@ -1809,7 +1809,7 @@
     {
         "datetime": "2026/03/04 23:59",
         "Date": "03/04",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 15",
         "Score": "",
@@ -1822,7 +1822,7 @@
     {
         "datetime": "2026/03/04 23:59",
         "Date": "03/04",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Library Lab",
         "Score": "",
@@ -1848,7 +1848,7 @@
     {
         "datetime": "2026/03/05 17:59",
         "Date": "03/05",
-        "Time": "05:59 PM",
+        "Time": "17:59",
         "Class": "BIOLOGY",
         "Assignment": "WTL: Your Inner Fish #3 CH. 1-4 Discussion",
         "Score": "",
@@ -1861,7 +1861,7 @@
     {
         "datetime": "2026/03/05 23:59",
         "Date": "03/05",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 3.6",
         "Score": "",
@@ -1887,7 +1887,7 @@
     {
         "datetime": "2026/03/06 14:00",
         "Date": "03/06",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 16",
         "Score": "",
@@ -1900,7 +1900,7 @@
     {
         "datetime": "2026/03/06 23:59",
         "Date": "03/06",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "6. Quiz on Early Christianity",
         "Score": "",
@@ -1913,7 +1913,7 @@
     {
         "datetime": "2026/03/07 05:00",
         "Date": "03/07",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 8",
         "Score": "",
@@ -1926,7 +1926,7 @@
     {
         "datetime": "2026/03/07 23:59",
         "Date": "03/07",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 16",
         "Score": "",
@@ -1939,7 +1939,7 @@
     {
         "datetime": "2026/03/09 23:00",
         "Date": "03/09",
-        "Time": "11:00 PM",
+        "Time": "23:00",
         "Class": "BIOLOGY",
         "Assignment": "Lab 7 Homework",
         "Score": "",
@@ -1952,7 +1952,7 @@
     {
         "datetime": "2026/03/09 23:59",
         "Date": "03/09",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 8 Quiz",
         "Score": "",
@@ -1965,7 +1965,7 @@
     {
         "datetime": "2026/03/09 23:59",
         "Date": "03/09",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 10",
         "Score": "",
@@ -1978,7 +1978,7 @@
     {
         "datetime": "2026/03/10 14:00",
         "Date": "03/10",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 17",
         "Score": "",
@@ -1991,7 +1991,7 @@
     {
         "datetime": "2026/03/10 17:59",
         "Date": "03/10",
-        "Time": "05:59 PM",
+        "Time": "17:59",
         "Class": "BIOLOGY",
         "Assignment": "Evolution Microtheme Essay",
         "Score": "",
@@ -2004,7 +2004,7 @@
     {
         "datetime": "2026/03/10 23:59",
         "Date": "03/10",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 4.1",
         "Score": "",
@@ -2017,7 +2017,7 @@
     {
         "datetime": "2026/03/10 23:59",
         "Date": "03/10",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 4.3",
         "Score": "",
@@ -2030,7 +2030,7 @@
     {
         "datetime": "2026/03/10 23:59",
         "Date": "03/10",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "#9 - Community of Learners",
         "Score": "",
@@ -2043,7 +2043,7 @@
     {
         "datetime": "2026/03/11 23:59",
         "Date": "03/11",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 17",
         "Score": "",
@@ -2056,7 +2056,7 @@
     {
         "datetime": "2026/03/12 10:50",
         "Date": "03/12",
-        "Time": "10:50 AM",
+        "Time": "10:50",
         "Class": "BIOLOGY",
         "Assignment": "Lab 8",
         "Score": "",
@@ -2069,7 +2069,7 @@
     {
         "datetime": "2026/03/12 23:59",
         "Date": "03/12",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 4.2",
         "Score": "",
@@ -2082,7 +2082,7 @@
     {
         "datetime": "2026/03/12 23:59",
         "Date": "03/12",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 4.4",
         "Score": "",
@@ -2095,7 +2095,7 @@
     {
         "datetime": "2026/03/13 14:00",
         "Date": "03/13",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 18",
         "Score": "",
@@ -2108,7 +2108,7 @@
     {
         "datetime": "2026/03/14 05:00",
         "Date": "03/14",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 9",
         "Score": "",
@@ -2121,7 +2121,7 @@
     {
         "datetime": "2026/03/14 23:59",
         "Date": "03/14",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 18",
         "Score": "",
@@ -2134,7 +2134,7 @@
     {
         "datetime": "2026/03/14 23:59",
         "Date": "03/14",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reflection 4",
         "Score": "",
@@ -2147,7 +2147,7 @@
     {
         "datetime": "2026/03/14 23:59",
         "Date": "03/14",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Assignment 9A (In-Class)",
         "Score": "",
@@ -2160,7 +2160,7 @@
     {
         "datetime": "2026/03/16 23:00",
         "Date": "03/16",
-        "Time": "11:00 PM",
+        "Time": "23:00",
         "Class": "BIOLOGY",
         "Assignment": "Lab 8 Homework",
         "Score": "",
@@ -2173,7 +2173,7 @@
     {
         "datetime": "2026/03/16 23:59",
         "Date": "03/16",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 9 Quiz",
         "Score": "",
@@ -2186,7 +2186,7 @@
     {
         "datetime": "2026/03/17 14:00",
         "Date": "03/17",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 19",
         "Score": "",
@@ -2199,7 +2199,7 @@
     {
         "datetime": "2026/03/17 23:59",
         "Date": "03/17",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 4.3",
         "Score": "",
@@ -2212,7 +2212,7 @@
     {
         "datetime": "2026/03/17 23:59",
         "Date": "03/17",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "#10 - Community of Learners",
         "Score": "",
@@ -2225,7 +2225,7 @@
     {
         "datetime": "2026/03/18 23:59",
         "Date": "03/18",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 19",
         "Score": "",
@@ -2238,7 +2238,7 @@
     {
         "datetime": "2026/03/18 23:59",
         "Date": "03/18",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 11",
         "Score": "",
@@ -2251,7 +2251,7 @@
     {
         "datetime": "2026/03/18 23:59",
         "Date": "03/18",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "EXAM 5. ONLINE",
         "Score": "",
@@ -2264,7 +2264,7 @@
     {
         "datetime": "2026/03/19 10:50",
         "Date": "03/19",
-        "Time": "10:50 AM",
+        "Time": "10:50",
         "Class": "BIOLOGY",
         "Assignment": "Lab 9",
         "Score": "",
@@ -2277,7 +2277,7 @@
     {
         "datetime": "2026/03/19 14:00",
         "Date": "03/19",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 20",
         "Score": "",
@@ -2290,7 +2290,7 @@
     {
         "datetime": "2026/03/19 23:59",
         "Date": "03/19",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 20",
         "Score": "",
@@ -2303,7 +2303,7 @@
     {
         "datetime": "2026/03/19 23:59",
         "Date": "03/19",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 4.4",
         "Score": "",
@@ -2316,7 +2316,7 @@
     {
         "datetime": "2026/03/19 23:59",
         "Date": "03/19",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Concept Map - Exam 2",
         "Score": "",
@@ -2329,7 +2329,7 @@
     {
         "datetime": "2026/03/19 23:59",
         "Date": "03/19",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 5.1",
         "Score": "",
@@ -2342,7 +2342,7 @@
     {
         "datetime": "2026/03/23 23:00",
         "Date": "03/23",
-        "Time": "11:00 PM",
+        "Time": "23:00",
         "Class": "BIOLOGY",
         "Assignment": "Lab 9 Homework",
         "Score": "",
@@ -2355,7 +2355,7 @@
     {
         "datetime": "2026/03/23 23:59",
         "Date": "03/23",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 10 Quiz",
         "Score": "",
@@ -2368,7 +2368,7 @@
     {
         "datetime": "2026/03/23 23:59",
         "Date": "03/23",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 12",
         "Score": "",
@@ -2381,7 +2381,7 @@
     {
         "datetime": "2026/03/23 23:59",
         "Date": "03/23",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "FS Memories- Record a Story",
         "Score": "",
@@ -2394,7 +2394,7 @@
     {
         "datetime": "2026/03/24 14:00",
         "Date": "03/24",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 21",
         "Score": "",
@@ -2407,7 +2407,7 @@
     {
         "datetime": "2026/03/24 23:59",
         "Date": "03/24",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 5.2",
         "Score": "",
@@ -2420,7 +2420,7 @@
     {
         "datetime": "2026/03/24 23:59",
         "Date": "03/24",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "#11 - Community of Learners",
         "Score": "",
@@ -2433,7 +2433,7 @@
     {
         "datetime": "2026/03/25 05:00",
         "Date": "03/25",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 10",
         "Score": "",
@@ -2446,7 +2446,7 @@
     {
         "datetime": "2026/03/25 21:00",
         "Date": "03/25",
-        "Time": "09:00 PM",
+        "Time": "21:00",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "MIDTERM 2",
         "Score": "",
@@ -2459,7 +2459,7 @@
     {
         "datetime": "2026/03/25 23:59",
         "Date": "03/25",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 21",
         "Score": "",
@@ -2472,7 +2472,7 @@
     {
         "datetime": "2026/03/26 10:50",
         "Date": "03/26",
-        "Time": "10:50 AM",
+        "Time": "10:50",
         "Class": "BIOLOGY",
         "Assignment": "Lab 10",
         "Score": "",
@@ -2485,7 +2485,7 @@
     {
         "datetime": "2026/03/26 23:59",
         "Date": "03/26",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 5.1",
         "Score": "",
@@ -2498,7 +2498,7 @@
     {
         "datetime": "2026/03/26 23:59",
         "Date": "03/26",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 5.3",
         "Score": "",
@@ -2511,7 +2511,7 @@
     {
         "datetime": "2026/03/27 14:00",
         "Date": "03/27",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 22",
         "Score": "",
@@ -2524,7 +2524,7 @@
     {
         "datetime": "2026/03/27 23:59",
         "Date": "03/27",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "Critical Paper on Aquinas",
         "Score": "",
@@ -2537,7 +2537,7 @@
     {
         "datetime": "2026/03/28 10:50",
         "Date": "03/28",
-        "Time": "10:50 AM",
+        "Time": "10:50",
         "Class": "BIOLOGY",
         "Assignment": "Fruit Fly Experiment",
         "Score": "",
@@ -2550,7 +2550,7 @@
     {
         "datetime": "2026/03/28 23:59",
         "Date": "03/28",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 22",
         "Score": "",
@@ -2563,7 +2563,7 @@
     {
         "datetime": "2026/03/30 23:00",
         "Date": "03/30",
-        "Time": "11:00 PM",
+        "Time": "23:00",
         "Class": "BIOLOGY",
         "Assignment": "Lab 10 Homework",
         "Score": "",
@@ -2576,7 +2576,7 @@
     {
         "datetime": "2026/03/30 23:59",
         "Date": "03/30",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "7. Quiz on Aquinas",
         "Score": "",
@@ -2589,7 +2589,7 @@
     {
         "datetime": "2026/03/30 23:59",
         "Date": "03/30",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 11 Quiz",
         "Score": "",
@@ -2602,7 +2602,7 @@
     {
         "datetime": "2026/03/31 14:00",
         "Date": "03/31",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 23",
         "Score": "",
@@ -2615,7 +2615,7 @@
     {
         "datetime": "2026/03/31 23:59",
         "Date": "03/31",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 5.2",
         "Score": "",
@@ -2628,7 +2628,7 @@
     {
         "datetime": "2026/03/31 23:59",
         "Date": "03/31",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 5.4",
         "Score": "",
@@ -2641,7 +2641,7 @@
     {
         "datetime": "2026/03/31 23:59",
         "Date": "03/31",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "#12 - Community of Learners",
         "Score": "",
@@ -2654,7 +2654,7 @@
     {
         "datetime": "2026/04/01 05:00",
         "Date": "04/01",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 11",
         "Score": "",
@@ -2667,7 +2667,7 @@
     {
         "datetime": "2026/04/01 23:59",
         "Date": "04/01",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 23",
         "Score": "",
@@ -2680,7 +2680,7 @@
     {
         "datetime": "2026/04/02 10:50",
         "Date": "04/02",
-        "Time": "10:50 AM",
+        "Time": "10:50",
         "Class": "BIOLOGY",
         "Assignment": "Lab 11",
         "Score": "",
@@ -2693,7 +2693,7 @@
     {
         "datetime": "2026/04/02 14:00",
         "Date": "04/02",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 24",
         "Score": "",
@@ -2706,7 +2706,7 @@
     {
         "datetime": "2026/04/02 23:59",
         "Date": "04/02",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 5.3",
         "Score": "",
@@ -2719,7 +2719,7 @@
     {
         "datetime": "2026/04/04 23:59",
         "Date": "04/04",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 24",
         "Score": "",
@@ -2732,7 +2732,7 @@
     {
         "datetime": "2026/04/04 23:59",
         "Date": "04/04",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 13",
         "Score": "",
@@ -2745,7 +2745,7 @@
     {
         "datetime": "2026/04/04 23:59",
         "Date": "04/04",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reflection 5",
         "Score": "",
@@ -2758,7 +2758,7 @@
     {
         "datetime": "2026/04/04 23:59",
         "Date": "04/04",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Student Presentation Slides",
         "Score": "",
@@ -2771,7 +2771,7 @@
     {
         "datetime": "2026/04/04 23:59",
         "Date": "04/04",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Meet with Dr. Harris (Extra Credit)",
         "Score": "",
@@ -2784,7 +2784,7 @@
     {
         "datetime": "2026/04/06 23:00",
         "Date": "04/06",
-        "Time": "11:00 PM",
+        "Time": "23:00",
         "Class": "BIOLOGY",
         "Assignment": "Lab 11 Homework",
         "Score": "",
@@ -2797,7 +2797,7 @@
     {
         "datetime": "2026/04/06 23:59",
         "Date": "04/06",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 12 Quiz",
         "Score": "",
@@ -2810,7 +2810,7 @@
     {
         "datetime": "2026/04/07 14:00",
         "Date": "04/07",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 25",
         "Score": "",
@@ -2823,7 +2823,7 @@
     {
         "datetime": "2026/04/07 17:59",
         "Date": "04/07",
-        "Time": "05:59 PM",
+        "Time": "17:59",
         "Class": "BIOLOGY",
         "Assignment": "FINAL DRAFT: Your Inner Fish Book Review",
         "Score": "",
@@ -2836,7 +2836,7 @@
     {
         "datetime": "2026/04/07 23:59",
         "Date": "04/07",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 5.4",
         "Score": "",
@@ -2849,7 +2849,7 @@
     {
         "datetime": "2026/04/08 05:00",
         "Date": "04/08",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 12",
         "Score": "",
@@ -2862,7 +2862,7 @@
     {
         "datetime": "2026/04/08 23:59",
         "Date": "04/08",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 25",
         "Score": "",
@@ -2875,7 +2875,7 @@
     {
         "datetime": "2026/04/08 23:59",
         "Date": "04/08",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "8. Quiz on Negative Theology",
         "Score": "",
@@ -2888,7 +2888,7 @@
     {
         "datetime": "2026/04/08 23:59",
         "Date": "04/08",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reading Week 14",
         "Score": "",
@@ -2901,7 +2901,7 @@
     {
         "datetime": "2026/04/08 23:59",
         "Date": "04/08",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Attendence",
         "Score": "",
@@ -2914,7 +2914,7 @@
     {
         "datetime": "2026/04/09 10:50",
         "Date": "04/09",
-        "Time": "10:50 AM",
+        "Time": "10:50",
         "Class": "BIOLOGY",
         "Assignment": "Lab 12",
         "Score": "",
@@ -2927,7 +2927,7 @@
     {
         "datetime": "2026/04/09 12:30",
         "Date": "04/09",
-        "Time": "12:30 PM",
+        "Time": "12:30",
         "Class": "BIOLOGY",
         "Assignment": "Ecology and Evolution Homework",
         "Score": "",
@@ -2940,7 +2940,7 @@
     {
         "datetime": "2026/04/09 14:00",
         "Date": "04/09",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 26",
         "Score": "",
@@ -2953,7 +2953,7 @@
     {
         "datetime": "2026/04/09 23:59",
         "Date": "04/09",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "WebAssign 7.4",
         "Score": "",
@@ -2966,7 +2966,7 @@
     {
         "datetime": "2026/04/10 23:59",
         "Date": "04/10",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Patterns",
         "Score": "",
@@ -2979,7 +2979,7 @@
     {
         "datetime": "2026/04/10 23:59",
         "Date": "04/10",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "Medieval-Thinker Assignment",
         "Score": "",
@@ -2992,7 +2992,7 @@
     {
         "datetime": "2026/04/11 23:59",
         "Date": "04/11",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 26",
         "Score": "",
@@ -3005,7 +3005,7 @@
     {
         "datetime": "2026/04/11 23:59",
         "Date": "04/11",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Reflection 6",
         "Score": "",
@@ -3018,7 +3018,7 @@
     {
         "datetime": "2026/04/11 23:59",
         "Date": "04/11",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Oral Interview",
         "Score": "",
@@ -3031,7 +3031,7 @@
     {
         "datetime": "2026/04/11 23:59",
         "Date": "04/11",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Family History Workshops Part 2",
         "Score": "",
@@ -3044,7 +3044,7 @@
     {
         "datetime": "2026/04/13 23:59",
         "Date": "04/13",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 12 Homework",
         "Score": "",
@@ -3057,7 +3057,7 @@
     {
         "datetime": "2026/04/14 23:59",
         "Date": "04/14",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "Section 7.4",
         "Score": "",
@@ -3070,7 +3070,7 @@
     {
         "datetime": "2026/04/15 05:00",
         "Date": "04/15",
-        "Time": "05:00 AM",
+        "Time": "05:00",
         "Class": "COMPUTATIONAL",
         "Assignment": "Lab 13",
         "Score": "",
@@ -3083,7 +3083,7 @@
     {
         "datetime": "2026/04/15 14:00",
         "Date": "04/15",
-        "Time": "02:00 PM",
+        "Time": "14:00",
         "Class": "PHYSICS",
         "Assignment": "Reading 27",
         "Score": "",
@@ -3096,7 +3096,7 @@
     {
         "datetime": "2026/04/15 23:59",
         "Date": "04/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "Homework 27",
         "Score": "",
@@ -3109,7 +3109,7 @@
     {
         "datetime": "2026/04/15 23:59",
         "Date": "04/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "9. Quiz on Nominalism",
         "Score": "",
@@ -3122,7 +3122,7 @@
     {
         "datetime": "2026/04/15 23:59",
         "Date": "04/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHILOSOPHY",
         "Assignment": "Extra Credit",
         "Score": "",
@@ -3135,7 +3135,7 @@
     {
         "datetime": "2026/04/15 23:59",
         "Date": "04/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "BIOLOGY",
         "Assignment": "Lab 13 Homework",
         "Score": "",
@@ -3148,7 +3148,7 @@
     {
         "datetime": "2026/04/15 23:59",
         "Date": "04/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Textbook Link",
         "Score": "",
@@ -3161,7 +3161,7 @@
     {
         "datetime": "2026/04/15 23:59",
         "Date": "04/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "In-class Presentation",
         "Score": "",
@@ -3174,7 +3174,7 @@
     {
         "datetime": "2026/04/15 23:59",
         "Date": "04/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Final Project",
         "Score": "",
@@ -3187,7 +3187,7 @@
     {
         "datetime": "2026/04/15 23:59",
         "Date": "04/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Perfect Attendence (Extra Credit)",
         "Score": "",
@@ -3200,7 +3200,7 @@
     {
         "datetime": "2026/04/15 23:59",
         "Date": "04/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Recruit for Hist 205 (Extra Credit)",
         "Score": "",
@@ -3213,7 +3213,7 @@
     {
         "datetime": "2026/04/15 23:59",
         "Date": "04/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Extra Workshops (Extra Credit)",
         "Score": "",
@@ -3226,7 +3226,7 @@
     {
         "datetime": "2026/04/15 23:59",
         "Date": "04/15",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Assignment 6A Textbook (Extra Credit)",
         "Score": "",
@@ -3239,7 +3239,7 @@
     {
         "datetime": "2026/04/16 23:59",
         "Date": "04/16",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "RELIGION",
         "Assignment": "Student Ratings",
         "Score": "",
@@ -3252,7 +3252,7 @@
     {
         "datetime": "2026/04/18 10:00",
         "Date": "04/18",
-        "Time": "10:00 AM",
+        "Time": "10:00",
         "Class": "PHILOSOPHY",
         "Assignment": "10. Final Exam",
         "Score": "",
@@ -3265,7 +3265,7 @@
     {
         "datetime": "2026/04/21 23:59",
         "Date": "04/21",
-        "Time": "11:59 PM",
+        "Time": "23:59",
         "Class": "PHYSICS",
         "Assignment": "FINAL",
         "Score": "",
@@ -3278,7 +3278,7 @@
     {
         "datetime": "2026/04/22 20:00",
         "Date": "04/22",
-        "Time": "08:00 PM",
+        "Time": "20:00",
         "Class": "PHYSICS",
         "Assignment": "FINAL",
         "Score": "",
@@ -3291,7 +3291,7 @@
     {
         "datetime": "2026/04/22 20:00",
         "Date": "04/22",
-        "Time": "08:00 PM",
+        "Time": "20:00",
         "Class": "LINEAR ALGEBRA",
         "Assignment": "FINAL",
         "Score": "",
