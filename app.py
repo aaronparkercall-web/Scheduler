@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import json
+import webbrowser
 from datetime import datetime
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from threading import Timer
 from urllib.parse import urlparse
 
 from parsing import compute_displays_from_inputs, parse_mmdd_to_datetime, parse_planner_datetime
@@ -217,13 +219,17 @@ INDEX_HTML = """
       --acc:#6ea8fe;
       --input-bg:#0e1830;
       --input-border:#2d3a58;
+      --tab-bg:#0e1830;
+      --tab-active:#4e8cff;
+      --tab-active-text:#071226;
     }
     * { box-sizing:border-box; font-family: Inter, Segoe UI, system-ui, sans-serif; }
+    html { font-size: clamp(14px, 1vw + 8px, 18px); }
     body { margin:0; background:linear-gradient(170deg,var(--bg-start),var(--bg-end)); color:var(--text); }
-    .wrap { max-width:1200px; margin:0 auto; padding:24px; }
+    .wrap { width:min(1200px, 100%); margin:0 auto; padding:clamp(12px, 2.5vw, 24px); }
     .hero, .card { background:color-mix(in srgb, var(--card) 92%, transparent); border:1px solid rgba(255,255,255,.08); border-radius:24px; padding:18px; box-shadow:0 16px 40px rgba(0,0,0,.28); }
     .hero h1 { margin:0; }
-    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:16px; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-top:16px; }
     input, select, button, textarea { width:100%; border-radius:14px; border:1px solid var(--input-border); background:var(--input-bg); color:var(--text); padding:10px; }
     button { background:linear-gradient(130deg,#4e8cff,#7da8ff); border:none; font-weight:600; cursor:pointer; }
     table { width:100%; border-collapse:separate; border-spacing:0 8px; }
@@ -237,10 +243,14 @@ INDEX_HTML = """
     .actions button { padding:8px 10px; }
     .section-title { margin-top:18px; color:var(--muted); }
     .tabs { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
-    .tab { width:auto; padding:8px 14px; border-radius:999px; background:#0e1830; border:1px solid rgba(255,255,255,.2); }
-    .tab.active { background:linear-gradient(130deg,#4e8cff,#7da8ff); color:#071226; }
+    .tab { width:auto; padding:8px 14px; border-radius:999px; background:var(--tab-bg); border:1px solid rgba(255,255,255,.2); }
+    .tab.active { background:var(--tab-active); color:var(--tab-active-text); }
     .settings-grid { display:grid; grid-template-columns:repeat(3,minmax(150px,1fr)); gap:10px; margin-top:12px; }
     .hidden { display:none; }
+    @media (max-width: 720px) {
+      .settings-grid { grid-template-columns:repeat(2,minmax(140px,1fr)); }
+      td,th { padding:8px; font-size:0.9rem; }
+    }
   </style>
 </head>
 <body>
@@ -302,6 +312,9 @@ INDEX_HTML = """
         <label>Accent Color <input id="accentColor" type="color" value="#6ea8fe" onchange="updateTheme()" /></label>
         <label>Input Background <input id="inputBg" type="color" value="#0e1830" onchange="updateTheme()" /></label>
         <label>Input Border <input id="inputBorder" type="color" value="#2d3a58" onchange="updateTheme()" /></label>
+        <label>Tab Button Color <input id="tabBg" type="color" value="#0e1830" onchange="updateTheme()" /></label>
+        <label>Active Tab Color <input id="tabActive" type="color" value="#4e8cff" onchange="updateTheme()" /></label>
+        <label>Active Tab Text <input id="tabActiveText" type="color" value="#071226" onchange="updateTheme()" /></label>
       </div>
     </div>
   </div>
@@ -357,6 +370,9 @@ INDEX_HTML = """
     document.documentElement.style.setProperty('--acc', colors.accentColor);
     document.documentElement.style.setProperty('--input-bg', colors.inputBg);
     document.documentElement.style.setProperty('--input-border', colors.inputBorder);
+    document.documentElement.style.setProperty('--tab-bg', colors.tabBg);
+    document.documentElement.style.setProperty('--tab-active', colors.tabActive);
+    document.documentElement.style.setProperty('--tab-active-text', colors.tabActiveText);
     document.getElementById('bgStart').value = colors.bgStart;
     document.getElementById('bgEnd').value = colors.bgEnd;
     document.getElementById('cardBg').value = colors.cardBg;
@@ -366,6 +382,9 @@ INDEX_HTML = """
     document.getElementById('accentColor').value = colors.accentColor;
     document.getElementById('inputBg').value = colors.inputBg;
     document.getElementById('inputBorder').value = colors.inputBorder;
+    document.getElementById('tabBg').value = colors.tabBg;
+    document.getElementById('tabActive').value = colors.tabActive;
+    document.getElementById('tabActiveText').value = colors.tabActiveText;
   }
 
   function updateTheme(){
@@ -379,6 +398,9 @@ INDEX_HTML = """
       accentColor: document.getElementById('accentColor').value,
       inputBg: document.getElementById('inputBg').value,
       inputBorder: document.getElementById('inputBorder').value,
+      tabBg: document.getElementById('tabBg').value,
+      tabActive: document.getElementById('tabActive').value,
+      tabActiveText: document.getElementById('tabActiveText').value,
     };
     applyTheme(colors);
     localStorage.setItem('schedulerTheme', JSON.stringify(colors));
@@ -427,7 +449,9 @@ INDEX_HTML = """
       if(a.Flagged){ statuses.push('<span class="pill flag">Flagged</span>'); }
       if(!statuses.length){ statuses.push('<span class="pill warn">Open</span>'); }
       const status = statuses.join(' ');
-      const points = a.Score && a.MaxPoints ? `${a.Score}/${a.MaxPoints}` : (a.Score || a.MaxPoints ? `${a.Score || '-'}/${a.MaxPoints || '-'}` : '-');
+      const points = a.Score && String(a.Score).includes('/')
+        ? a.Score
+        : (a.Score || a.MaxPoints ? `${a.Score || '-'}/${a.MaxPoints || '-'}` : '-');
       const tr = document.createElement('tr');
       tr.innerHTML = `<td>${a.Date} ${a.Time}</td><td>${a.Class}</td><td>${a.Assignment}</td><td>${a.Grade || '-'}</td><td>${points}</td><td>${status}</td>
       <td class="actions"><button onclick='editAssignment(${a.id})'>Edit</button><button onclick='toggle(${a.id},"Complete")'>✓</button><button onclick='toggle(${a.id},"Flagged")'>🚩</button><button onclick='delAssignment(${a.id})'>Delete</button></td>`;
@@ -460,7 +484,9 @@ INDEX_HTML = """
 
 def main() -> None:
     server = ThreadingHTTPServer((HOST, PORT), SchedulerHandler)
-    print(f"Scheduler web UI running at http://{HOST}:{PORT}")
+    launch_url = f"http://localhost:{PORT}"
+    print(f"Scheduler web UI running at {launch_url}")
+    Timer(0.3, lambda: webbrowser.open(launch_url)).start()
     server.serve_forever()
 
 
