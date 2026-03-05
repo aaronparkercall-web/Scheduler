@@ -93,6 +93,21 @@ def build_main_tables(
     return table_all, table_flagged
 
 
+def build_planner_table(tab_planner: ttk.Frame) -> ttk.Treeview:
+    columns = ["Type", "TODO Date", "Class", "Item"]
+    table_planner = ttk.Treeview(tab_planner, columns=columns, show="headings", selectmode="extended")
+    for col in columns:
+        table_planner.heading(col, text=col, anchor="w")
+        width = 140
+        if col == "Item":
+            width = 520
+        if col == "TODO Date":
+            width = 120
+        table_planner.column(col, anchor="w", width=width)
+    table_planner.pack(fill="both", expand=True)
+    return table_planner
+
+
 def rebuild_class_tabs_if_needed(
     state: AppState,
     notebook: ttk.Notebook,
@@ -214,11 +229,35 @@ def fill_flagged_table(state: AppState, table_flagged: ttk.Treeview) -> None:
         )
 
 
+def fill_planner_table(state: AppState, table_planner: ttk.Treeview) -> None:
+    for row in table_planner.get_children():
+        table_planner.delete(row)
+
+    sorted_items = sorted(
+        enumerate(state.planner_items),
+        key=lambda x: x[1].get("TodoDate", ""),
+    )
+
+    for i, (idx, item) in enumerate(sorted_items):
+        stripe = "even" if i % 2 == 0 else "odd"
+        table_planner.insert(
+            "", "end", iid=str(idx),
+            values=(
+                item.get("Type", ""),
+                item.get("TodoDate", ""),
+                item.get("Class", ""),
+                item.get("Title", ""),
+            ),
+            tags=(stripe,)
+        )
+
+
 def refresh_tables(
     state: AppState,
     notebook: ttk.Notebook,
     table_all: ttk.Treeview,
     table_flagged: ttk.Treeview,
+    table_planner: ttk.Treeview | None,
     settings: dict[str, Any],
     on_right_click_any: Callable[[ttk.Treeview, Any], None],
     on_select: Callable[[ttk.Treeview], None],
@@ -238,6 +277,8 @@ def refresh_tables(
         fill_class_table(state, cls, obj["tree"])
 
     fill_flagged_table(state, table_flagged)
+    if table_planner is not None:
+        fill_planner_table(state, table_planner)
 
     if jump:
         jump_to_today(state, table_all)

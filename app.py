@@ -11,8 +11,8 @@ import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 
 from state import AppState
-from storage import load_data, load_settings
-from ui_tables import build_main_tables, apply_treeview_selection_style, configure_tags, refresh_tables
+from storage import load_data, load_settings, load_planner_items
+from ui_tables import build_main_tables, build_planner_table, apply_treeview_selection_style, configure_tags, refresh_tables
 from ui_actions import ActionHandlers
 from ui_settings import build_settings_tab
 
@@ -35,6 +35,7 @@ def main() -> None:
     state = AppState()
     state.settings = load_settings()
     state.data = load_data()
+    state.planner_items = load_planner_items()
 
     apply_treeview_selection_style(style, state.settings)
 
@@ -62,6 +63,10 @@ def main() -> None:
     score_var = ttk.StringVar()
     grade_var = ttk.StringVar()
     max_points_var = ttk.StringVar()
+    planner_assignment_var = ttk.StringVar()
+    planner_todo_date_var = ttk.StringVar()
+    planner_event_title_var = ttk.StringVar()
+    planner_event_class_var = ttk.StringVar()
 
     ttk.Label(input_frame, text="Date (MM/DD)", style="BoldLabel.TLabel").grid(row=0, column=0, padx=5, sticky="w")
     ttk.Entry(input_frame, width=10, textvariable=date_var).grid(row=1, column=0, padx=5, pady=(3, 0), sticky="ew")
@@ -93,14 +98,43 @@ def main() -> None:
 
     tab_all = ttk.Frame(notebook)
     tab_flagged = ttk.Frame(notebook)
+    tab_planner = ttk.Frame(notebook)
     tab_settings = ttk.Frame(notebook)
 
     notebook.add(tab_all, text="All Assignments")
     notebook.add(tab_flagged, text="Flagged")
+    notebook.add(tab_planner, text="Planner")
     notebook.add(tab_settings, text="Settings")
 
     # Tables
     table_all, table_flagged = build_main_tables(tab_all, tab_flagged, state.settings)
+
+    planner_controls = ttk.Labelframe(tab_planner, text="Planner Actions", padding=(10, 10))
+    planner_controls.pack(fill="x", padx=8, pady=(8, 6))
+
+    ttk.Label(planner_controls, text="Assignment", style="BoldLabel.TLabel").grid(row=0, column=0, sticky="w", padx=4)
+    planner_assignment_combo = ttk.Combobox(planner_controls, textvariable=planner_assignment_var, state="readonly", width=50)
+    planner_assignment_combo.grid(row=1, column=0, padx=4, pady=(3, 0), sticky="ew")
+
+    ttk.Label(planner_controls, text="TODO Date (MM/DD)", style="BoldLabel.TLabel").grid(row=0, column=1, sticky="w", padx=4)
+    ttk.Entry(planner_controls, textvariable=planner_todo_date_var, width=14).grid(row=1, column=1, padx=4, pady=(3, 0), sticky="ew")
+
+    add_planner_assignment_btn = ttk.Button(planner_controls, text="Add Assignment to TODO", bootstyle="primary")
+    add_planner_assignment_btn.grid(row=1, column=2, padx=4, pady=(3, 0), sticky="ew")
+
+    ttk.Label(planner_controls, text="Event Title", style="BoldLabel.TLabel").grid(row=2, column=0, sticky="w", padx=4, pady=(10, 0))
+    ttk.Entry(planner_controls, textvariable=planner_event_title_var).grid(row=3, column=0, padx=4, pady=(3, 0), sticky="ew")
+
+    ttk.Label(planner_controls, text="Event Class (optional)", style="BoldLabel.TLabel").grid(row=2, column=1, sticky="w", padx=4, pady=(10, 0))
+    ttk.Entry(planner_controls, textvariable=planner_event_class_var, width=16).grid(row=3, column=1, padx=4, pady=(3, 0), sticky="ew")
+
+    add_planner_event_btn = ttk.Button(planner_controls, text="Add Event", bootstyle="success")
+    add_planner_event_btn.grid(row=3, column=2, padx=4, pady=(3, 0), sticky="ew")
+
+    for col in range(3):
+        planner_controls.columnconfigure(col, weight=1)
+
+    table_planner = build_planner_table(tab_planner)
 
     # Handlers
     handlers = ActionHandlers(
@@ -109,8 +143,10 @@ def main() -> None:
         tab_all=tab_all,
         tab_flagged=tab_flagged,
         tab_settings=tab_settings,
+        tab_planner=tab_planner,
         table_all=table_all,
         table_flagged=table_flagged,
+        table_planner=table_planner,
         style=style,
         state=state,
         date_var=date_var,
@@ -120,7 +156,15 @@ def main() -> None:
         score_var=score_var,
         grade_var=grade_var,
         max_points_var=max_points_var,
+        planner_assignment_var=planner_assignment_var,
+        planner_todo_date_var=planner_todo_date_var,
+        planner_event_title_var=planner_event_title_var,
+        planner_event_class_var=planner_event_class_var,
     )
+
+    planner_assignment_combo.configure(values=handlers.planner_assignment_options())
+    add_planner_assignment_btn.configure(command=handlers.add_assignment_to_planner_from_dropdown)
+    add_planner_event_btn.configure(command=handlers.add_event_to_planner)
 
     ttk.Button(input_frame, text="Clear", command=handlers.clear_inputs, bootstyle="secondary").grid(
         row=1,
@@ -140,9 +184,12 @@ def main() -> None:
     table_flagged.bind("<Button-2>", lambda e: handlers.on_right_click_any(table_flagged, e))
     table_flagged.bind("<Double-1>", handlers.on_double_click_flagged)
 
+    table_planner.bind("<<TreeviewSelect>>", lambda e: handlers.capture_selection(table_planner))
+
     # Ctrl+Z undo
     app.bind_all("<Control-z>", lambda e: handlers.undo_last_action())
     app.bind_all("<Control-Z>", lambda e: handlers.undo_last_action())
+    app.bind_all("<Delete>", lambda e: handlers.delete_selected())
 
     # Buttons
     button_frame = ttk.Labelframe(app, text="Actions", padding=(12, 10))
@@ -172,9 +219,13 @@ def main() -> None:
 
     configure_tags(table_all, state.settings)
     configure_tags(table_flagged, state.settings)
+    configure_tags(table_planner, state.settings)
 
     # Initial load/refresh incl class tabs
     handlers.refresh_tables(jump=True)
+    planner_assignment_combo.configure(values=handlers.planner_assignment_options())
+
+    notebook.bind("<<NotebookTabChanged>>", lambda e: planner_assignment_combo.configure(values=handlers.planner_assignment_options()))
 
     app.mainloop()
 
