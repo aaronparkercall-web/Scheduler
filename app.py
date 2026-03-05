@@ -1,264 +1,343 @@
 from __future__ import annotations
 
+import json
+from datetime import datetime
+from http import HTTPStatus
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlparse
+
+from parsing import compute_displays_from_inputs, parse_mmdd_to_datetime, parse_planner_datetime
+from storage import load_data, load_planner_items, save_data, save_planner_items
+
+HOST = "0.0.0.0"
+PORT = 8000
+
+
+def _json_response(handler: BaseHTTPRequestHandler, payload: dict | list, status: int = 200) -> None:
+    body = json.dumps(payload).encode("utf-8")
+    handler.send_response(status)
+    handler.send_header("Content-Type", "application/json; charset=utf-8")
+    handler.send_header("Content-Length", str(len(body)))
+    handler.end_headers()
+    handler.wfile.write(body)
+
+
+def _serialize_assignment(item: dict, idx: int) -> dict:
+    return {
+        "id": idx,
+        "Date": item.get("Date", ""),
+        "Time": item.get("Time", ""),
+        "Class": item.get("Class", ""),
+        "Assignment": item.get("Assignment", ""),
+        "Score": item.get("Score", ""),
+        "MaxPoints": item.get("MaxPoints", ""),
+        "Grade": item.get("Grade", ""),
+        "Complete": bool(item.get("Complete", False)),
+        "Flagged": bool(item.get("Flagged", False)),
+        "Note": item.get("Note", ""),
+        "datetime": item["datetime"].strftime("%Y/%m/%d %H:%M"),
+    }
+
+
+def _serialize_planner(item: dict, idx: int) -> dict:
+    return {
+        "id": idx,
+        "Type": item.get("Type", "Assignment"),
+        "TodoDate": item.get("TodoDate", ""),
+        "TodoTime": item.get("TodoTime", ""),
+        "Class": item.get("Class", ""),
+        "Title": item.get("Title", ""),
+    }
+
+
+class SchedulerHandler(BaseHTTPRequestHandler):
+    def _read_json(self) -> dict:
+        length = int(self.headers.get("Content-Length", "0"))
+        data = self.rfile.read(length) if length else b"{}"
+        return json.loads(data.decode("utf-8"))
+
+    def do_GET(self) -> None:
+        path = urlparse(self.path).path
+        if path == "/":
+            body = INDEX_HTML.encode("utf-8")
+            self.send_response(HTTPStatus.OK)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+            return
+
+        if path == "/api/assignments":
+            data = load_data()
+            data_sorted = sorted(enumerate(data), key=lambda x: x[1]["datetime"])
+            _json_response(self, [_serialize_assignment(item, idx) for idx, item in data_sorted])
+            return
+
+        if path == "/api/planner":
+            planner = load_planner_items()
+            _json_response(self, [_serialize_planner(item, idx) for idx, item in enumerate(planner)])
+            return
+
+        _json_response(self, {"error": "Not found"}, status=404)
+
+    def do_POST(self) -> None:
+        path = urlparse(self.path).path
+        try:
+            payload = self._read_json()
+            if path == "/api/assignments":
+                data = load_data()
+                dt = parse_mmdd_to_datetime(payload["Date"], payload["Time"])
+                grade, score, max_points = compute_displays_from_inputs(
+                    payload.get("Grade", ""),
+                    payload.get("Score", ""),
+                    payload.get("MaxPoints", ""),
+                )
+                data.append(
+                    {
+                        "datetime": dt,
+                        "Date": payload["Date"].strip(),
+                        "Time": payload["Time"].strip(),
+                        "Class": payload.get("Class", "").strip(),
+                        "Assignment": payload.get("Assignment", "").strip(),
+                        "Score": score,
+                        "MaxPoints": max_points,
+                        "Grade": grade,
+                        "Complete": bool(payload.get("Complete", False)),
+                        "Flagged": bool(payload.get("Flagged", False)),
+                        "Note": payload.get("Note", "").strip(),
+                    }
+                )
+                save_data(data)
+                _json_response(self, {"ok": True}, status=201)
+                return
+
+            if path == "/api/planner":
+                planner = load_planner_items()
+                todo_dt = parse_planner_datetime(payload["TodoDate"], payload["TodoTime"])
+                planner.append(
+                    {
+                        "Type": payload.get("Type", "Event"),
+                        "TodoDate": payload["TodoDate"].strip(),
+                        "TodoTime": todo_dt.strftime("%I:%M %p"),
+                        "TodoDateTime": todo_dt.strftime("%Y/%m/%d %H:%M"),
+                        "Class": payload.get("Class", "").strip(),
+                        "Title": payload.get("Title", "").strip(),
+                    }
+                )
+                save_planner_items(planner)
+                _json_response(self, {"ok": True}, status=201)
+                return
+
+            if path.endswith("/toggle") and path.startswith("/api/assignments/"):
+                idx = int(path.split("/")[3])
+                field = payload.get("field")
+                if field not in {"Complete", "Flagged"}:
+                    raise ValueError("field must be Complete or Flagged")
+                data = load_data()
+                data[idx][field] = not bool(data[idx].get(field, False))
+                save_data(data)
+                _json_response(self, {"ok": True})
+                return
+
+            _json_response(self, {"error": "Not found"}, status=404)
+        except Exception as exc:
+            _json_response(self, {"error": str(exc)}, status=400)
+
+    def do_PUT(self) -> None:
+        path = urlparse(self.path).path
+        try:
+            if not path.startswith("/api/assignments/"):
+                _json_response(self, {"error": "Not found"}, status=404)
+                return
+            idx = int(path.split("/")[3])
+            payload = self._read_json()
+            data = load_data()
+            dt = parse_mmdd_to_datetime(payload["Date"], payload["Time"])
+            grade, score, max_points = compute_displays_from_inputs(
+                payload.get("Grade", ""),
+                payload.get("Score", ""),
+                payload.get("MaxPoints", ""),
+            )
+            data[idx].update(
+                {
+                    "datetime": dt,
+                    "Date": payload["Date"].strip(),
+                    "Time": payload["Time"].strip(),
+                    "Class": payload.get("Class", "").strip(),
+                    "Assignment": payload.get("Assignment", "").strip(),
+                    "Score": score,
+                    "MaxPoints": max_points,
+                    "Grade": grade,
+                    "Note": payload.get("Note", "").strip(),
+                }
+            )
+            save_data(data)
+            _json_response(self, {"ok": True})
+        except Exception as exc:
+            _json_response(self, {"error": str(exc)}, status=400)
+
+    def do_DELETE(self) -> None:
+        path = urlparse(self.path).path
+        try:
+            if path.startswith("/api/assignments/"):
+                idx = int(path.split("/")[3])
+                data = load_data()
+                data.pop(idx)
+                save_data(data)
+                _json_response(self, {"ok": True})
+                return
+            if path.startswith("/api/planner/"):
+                idx = int(path.split("/")[3])
+                planner = load_planner_items()
+                planner.pop(idx)
+                save_planner_items(planner)
+                _json_response(self, {"ok": True})
+                return
+            _json_response(self, {"error": "Not found"}, status=404)
+        except Exception as exc:
+            _json_response(self, {"error": str(exc)}, status=400)
+
+
+INDEX_HTML = """
+<!doctype html>
+<html>
+<head>
+  <meta charset=\"utf-8\" />
+  <meta name=\"viewport\" content=\"width=device-width,initial-scale=1\" />
+  <title>Scheduler</title>
+  <style>
+    :root { --bg:#0b1220; --panel:#121b2f; --card:#17233c; --text:#e7ecf7; --muted:#9fb0d1; --acc:#6ea8fe; }
+    * { box-sizing:border-box; font-family: Inter, Segoe UI, system-ui, sans-serif; }
+    body { margin:0; background:linear-gradient(170deg,#0b1220,#1b2a4a); color:var(--text); }
+    .wrap { max-width:1200px; margin:0 auto; padding:24px; }
+    .hero, .card { background:rgba(23,35,60,.92); border:1px solid rgba(255,255,255,.08); border-radius:24px; padding:18px; box-shadow:0 16px 40px rgba(0,0,0,.28); }
+    .hero h1 { margin:0; }
+    .grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:16px; }
+    input, select, button, textarea { width:100%; border-radius:14px; border:1px solid rgba(255,255,255,.14); background:#0e1830; color:var(--text); padding:10px; }
+    button { background:linear-gradient(130deg,#4e8cff,#7da8ff); border:none; font-weight:600; cursor:pointer; }
+    table { width:100%; border-collapse:separate; border-spacing:0 8px; }
+    td,th { text-align:left; padding:10px; }
+    tbody tr { background:#0f1931; }
+    tbody tr td:first-child { border-radius:12px 0 0 12px; }
+    tbody tr td:last-child { border-radius:0 12px 12px 0; }
+    .pill { display:inline-block; border-radius:999px; padding:3px 10px; font-size:12px; }
+    .ok { background:#214f33; } .warn { background:#5c4a18; } .flag { background:#54295e; }
+    .actions { display:flex; gap:6px; }
+    .actions button { padding:8px 10px; }
+    .section-title { margin-top:18px; color:var(--muted); }
+  </style>
+</head>
+<body>
+<div class=\"wrap\">
+  <div class=\"hero\">
+    <h1>Scheduler — Modern Edition</h1>
+    <div style=\"color:var(--muted)\">Rounded interface, cleaner contrast, and no Tkinter.</div>
+  </div>
+
+  <div class=\"grid\">
+    <div class=\"card\">
+      <h3>Add / Update Assignment</h3>
+      <input id=\"date\" placeholder=\"Date MM/DD\" />
+      <input id=\"time\" placeholder=\"Time HH:MM (24h)\" />
+      <input id=\"class\" placeholder=\"Class\" />
+      <input id=\"assignment\" placeholder=\"Assignment\" />
+      <input id=\"score\" placeholder=\"Score (optional)\" />
+      <input id=\"max\" placeholder=\"Max points (optional)\" />
+      <input id=\"grade\" placeholder=\"Grade (optional)\" />
+      <textarea id=\"note\" placeholder=\"Note\"></textarea>
+      <div class=\"actions\" style=\"margin-top:8px\">
+        <button onclick=\"saveAssignment()\">Save</button>
+        <button onclick=\"resetForm()\">Clear</button>
+      </div>
+      <input type=\"hidden\" id=\"edit_id\" />
+    </div>
+    <div class=\"card\">
+      <h3>Add Planner Item</h3>
+      <select id=\"ptype\"><option>Assignment</option><option>Event</option></select>
+      <input id=\"ptitle\" placeholder=\"Title\" />
+      <input id=\"pclass\" placeholder=\"Class (optional)\" />
+      <input id=\"pdate\" placeholder=\"TODO date MM/DD\" />
+      <input id=\"ptime\" placeholder=\"TODO time HH:MM (24h)\" />
+      <button style=\"margin-top:8px\" onclick=\"addPlanner()\">Add Planner Item</button>
+    </div>
+  </div>
+
+  <h3 class=\"section-title\">Assignments</h3>
+  <div class=\"card\"><table><thead><tr><th>Due</th><th>Class</th><th>Assignment</th><th>Grade</th><th>Status</th><th></th></tr></thead><tbody id=\"assignments\"></tbody></table></div>
+
+  <h3 class=\"section-title\">Planner</h3>
+  <div class=\"card\"><table><thead><tr><th>Type</th><th>When</th><th>Class</th><th>Title</th><th></th></tr></thead><tbody id=\"planner\"></tbody></table></div>
+</div>
+<script>
+  async function api(path, opts={}) { const res = await fetch(path, {headers:{'Content-Type':'application/json'}, ...opts}); return res.json(); }
+  function val(id){return document.getElementById(id).value.trim();}
+
+  function resetForm(){ ['date','time','class','assignment','score','max','grade','note','edit_id'].forEach(id=>document.getElementById(id).value=''); }
+
+  async function saveAssignment(){
+    const payload = {Date:val('date'), Time:val('time'), Class:val('class'), Assignment:val('assignment'), Score:val('score'), MaxPoints:val('max'), Grade:val('grade'), Note:val('note')};
+    const id = val('edit_id');
+    const method = id ? 'PUT' : 'POST';
+    const path = id ? `/api/assignments/${id}` : '/api/assignments';
+    const out = await api(path, {method, body:JSON.stringify(payload)});
+    if(out.error){alert(out.error);return;}
+    resetForm();
+    await refresh();
+  }
+
+  async function editAssignment(id){
+    const a = currentAssignments.find(x => x.id === id);
+    if(!a){ return; }
+    document.getElementById('date').value=a.Date; document.getElementById('time').value=a.Time; document.getElementById('class').value=a.Class;
+    document.getElementById('assignment').value=a.Assignment; document.getElementById('score').value=a.Score; document.getElementById('max').value=a.MaxPoints;
+    document.getElementById('grade').value=a.Grade; document.getElementById('note').value=a.Note; document.getElementById('edit_id').value=a.id;
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  async function toggle(id, field){ await api(`/api/assignments/${id}/toggle`, {method:'POST', body:JSON.stringify({field})}); await refresh(); }
+  async function delAssignment(id){ if(confirm('Delete assignment?')){ await api(`/api/assignments/${id}`, {method:'DELETE'}); await refresh(); } }
+
+  async function addPlanner(){
+    const payload={Type:val('ptype'), Title:val('ptitle'), Class:val('pclass'), TodoDate:val('pdate'), TodoTime:val('ptime')};
+    const out = await api('/api/planner',{method:'POST',body:JSON.stringify(payload)});
+    if(out.error){alert(out.error);return;}
+    ['ptitle','pclass','pdate','ptime'].forEach(id=>document.getElementById(id).value='');
+    await refresh();
+  }
+  async function delPlanner(id){ await api(`/api/planner/${id}`,{method:'DELETE'}); await refresh(); }
+
+  let currentAssignments = [];
+
+  async function refresh(){
+    const assignments = await api('/api/assignments');
+    currentAssignments = assignments;
+    const tbody = document.getElementById('assignments'); tbody.innerHTML='';
+    assignments.forEach(a=>{
+      const status = `${a.Complete?'<span class="pill ok">Complete</span>':''} ${a.Flagged?'<span class="pill flag">Flagged</span>':''}` || '<span class="pill warn">Open</span>';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${a.Date} ${a.Time}</td><td>${a.Class}</td><td>${a.Assignment}</td><td>${a.Grade || a.Score || '-'}</td><td>${status}</td>
+      <td class="actions"><button onclick='editAssignment(${a.id})'>Edit</button><button onclick='toggle(${a.id},"Complete")'>✓</button><button onclick='toggle(${a.id},"Flagged")'>🚩</button><button onclick='delAssignment(${a.id})'>Delete</button></td>`;
+      tbody.appendChild(tr);
+    });
+
+    const planner = await api('/api/planner');
+    const pbody = document.getElementById('planner'); pbody.innerHTML='';
+    planner.forEach(p=>{
+      const tr = document.createElement('tr');
+      tr.innerHTML=`<td>${p.Type}</td><td>${p.TodoDate} ${p.TodoTime}</td><td>${p.Class}</td><td>${p.Title}</td><td><button onclick='delPlanner(${p.id})'>Delete</button></td>`;
+      pbody.appendChild(tr);
+    });
+  }
+  refresh();
+</script>
+</body></html>
 """
-Assignment Dashboard (ttkbootstrap + Treeview) - with Score support
-
-Run:
-    python app.py
-"""
-
-import ttkbootstrap as ttk
-from ttkbootstrap.constants import *
-
-from state import AppState
-from storage import load_data, load_settings, load_planner_items
-from ui_tables import build_main_tables, build_planner_table, apply_treeview_selection_style, configure_tags, refresh_tables
-from ui_actions import ActionHandlers
-from ui_settings import build_settings_tab
 
 
 def main() -> None:
-    app = ttk.Window(themename="flatly")
-    app.title("Assignment Dashboard")
-    app.geometry("1380x760")
-    app.minsize(1100, 500)
-    app.option_add("*Font", "{Segoe UI} 10")
-
-    style = ttk.Style()
-    style.configure("Treeview", rowheight=34, borderwidth=0)
-    style.configure("Treeview.Heading", font=("Segoe UI", 10, "bold"), borderwidth=0)
-    style.configure("Title.TLabel", font=("Segoe UI", 22, "bold"))
-    style.configure("Subtitle.TLabel", font=("Segoe UI", 10))
-    style.configure("SectionTitle.TLabel", font=("Segoe UI", 12, "bold"))
-    style.configure("BoldLabel.TLabel", font=("Segoe UI", 9, "bold"))
-    style.configure("SidebarTitle.TLabel", font=("Segoe UI", 18, "bold"))
-    style.configure("BoldLabel2.TLabel", font=("Segoe UI", 10))
-
-    # State
-    state = AppState()
-    state.settings = load_settings()
-    state.data = load_data()
-    state.planner_items = load_planner_items()
-
-    apply_treeview_selection_style(style, state.settings)
-
-    root = ttk.Frame(app, padding=18)
-    root.pack(fill="both", expand=True)
-
-    sidebar = ttk.Frame(root, padding=(20, 24), bootstyle="light")
-    sidebar.pack(side="left", fill="y", padx=(0, 12))
-
-    ttk.Label(sidebar, text="Scheduler", style="SidebarTitle.TLabel").pack(anchor="w", pady=(0, 4))
-    ttk.Label(sidebar, text="Plan and track all class work in one place.", style="BoldLabel2.TLabel").pack(anchor="w", pady=(0, 20))
-
-    ttk.Label(sidebar, text="Workspace", style="SectionTitle.TLabel").pack(anchor="w", pady=(0, 8))
-    ttk.Label(sidebar, text="• All Assignments", style="BoldLabel2.TLabel").pack(anchor="w", pady=2)
-    ttk.Label(sidebar, text="• Flagged", style="BoldLabel2.TLabel").pack(anchor="w", pady=2)
-    ttk.Label(sidebar, text="• Planner", style="BoldLabel2.TLabel").pack(anchor="w", pady=2)
-    ttk.Label(sidebar, text="• Settings", style="BoldLabel2.TLabel").pack(anchor="w", pady=(2, 18))
-
-    quick_card = ttk.Labelframe(sidebar, text="Tips", padding=(12, 12), bootstyle="info")
-    quick_card.pack(fill="x", pady=(0, 12))
-    ttk.Label(quick_card, text="Right-click rows to flag and add notes.", style="BoldLabel2.TLabel", wraplength=210).pack(anchor="w", pady=(0, 8))
-    ttk.Label(quick_card, text="Use Ctrl+Z to undo the last change.", style="BoldLabel2.TLabel", wraplength=210).pack(anchor="w")
-
-    main_area = ttk.Frame(root)
-    main_area.pack(side="left", fill="both", expand=True)
-
-    # Header
-    header_card = ttk.Frame(main_area, padding=(18, 16), bootstyle="light")
-    header_card.pack(fill="x", pady=(0, 10))
-    ttk.Label(header_card, text="Assignment Dashboard", style="Title.TLabel").pack(anchor="w")
-    ttk.Label(
-        header_card,
-        text="Track assignments, grades, and planner items with the same reliable workflow.",
-        style="Subtitle.TLabel",
-    ).pack(anchor="w", pady=(3, 0))
-
-    # Inputs
-    input_card = ttk.Labelframe(main_area, text="Assignment Details", padding=(14, 12), bootstyle="primary")
-    input_card.pack(fill="x", pady=(0, 10))
-
-    input_frame = ttk.Frame(input_card)
-    input_frame.pack(fill="x")
-
-    date_var = ttk.StringVar()
-    time_var = ttk.StringVar()
-    class_var = ttk.StringVar()
-    assignment_var = ttk.StringVar()
-    score_var = ttk.StringVar()
-    grade_var = ttk.StringVar()
-    max_points_var = ttk.StringVar()
-    planner_assignment_var = ttk.StringVar()
-    planner_todo_date_var = ttk.StringVar()
-    planner_todo_time_var = ttk.StringVar()
-    planner_event_title_var = ttk.StringVar()
-    planner_event_class_var = ttk.StringVar()
-
-    ttk.Label(input_frame, text="Date (MM/DD)", style="BoldLabel.TLabel").grid(row=0, column=0, padx=5, sticky="w")
-    ttk.Entry(input_frame, width=10, textvariable=date_var).grid(row=1, column=0, padx=5, pady=(3, 0), sticky="ew")
-
-    ttk.Label(input_frame, text="Time (HH:MM 24hr)", style="BoldLabel.TLabel").grid(row=0, column=1, padx=5, sticky="w")
-    ttk.Entry(input_frame, width=10, textvariable=time_var).grid(row=1, column=1, padx=5, pady=(3, 0), sticky="ew")
-
-    ttk.Label(input_frame, text="Class", style="BoldLabel.TLabel").grid(row=0, column=2, padx=5, sticky="w")
-    ttk.Entry(input_frame, width=15, textvariable=class_var).grid(row=1, column=2, padx=5, pady=(3, 0), sticky="ew")
-
-    ttk.Label(input_frame, text="Assignment", style="BoldLabel.TLabel").grid(row=0, column=3, padx=5, sticky="w")
-    ttk.Entry(input_frame, width=22, textvariable=assignment_var).grid(row=1, column=3, padx=5, pady=(3, 0), sticky="ew")
-
-    ttk.Label(input_frame, text="Score (optional)", style="BoldLabel.TLabel").grid(row=0, column=4, padx=5, sticky="w")
-    ttk.Entry(input_frame, width=14, textvariable=score_var).grid(row=1, column=4, padx=5, pady=(3, 0), sticky="ew")
-
-    ttk.Label(input_frame, text="Grade (optional)", style="BoldLabel.TLabel").grid(row=0, column=5, padx=5, sticky="w")
-    ttk.Entry(input_frame, width=14, textvariable=grade_var).grid(row=1, column=5, padx=5, pady=(3, 0), sticky="ew")
-
-    ttk.Label(input_frame, text="Max Points (optional)", style="BoldLabel.TLabel").grid(row=0, column=6, padx=5, sticky="w")
-    ttk.Entry(input_frame, width=12, textvariable=max_points_var).grid(row=1, column=6, padx=5, pady=(3, 0), sticky="ew")
-
-    for col in range(8):
-        input_frame.columnconfigure(col, weight=1)
-
-    # Tabs
-    notebook = ttk.Notebook(main_area, bootstyle="primary")
-    notebook.pack(fill="both", expand=True, pady=(0, 10))
-
-    tab_all = ttk.Frame(notebook)
-    tab_flagged = ttk.Frame(notebook)
-    tab_planner = ttk.Frame(notebook)
-    tab_settings = ttk.Frame(notebook)
-
-    notebook.add(tab_all, text="All Assignments")
-    notebook.add(tab_flagged, text="Flagged")
-    notebook.add(tab_planner, text="Planner")
-    notebook.add(tab_settings, text="Settings")
-
-    # Tables
-    table_all, table_flagged = build_main_tables(tab_all, tab_flagged, state.settings)
-
-    planner_controls = ttk.Labelframe(tab_planner, text="Planner Actions", padding=(10, 10), bootstyle="secondary")
-    planner_controls.pack(fill="x", padx=8, pady=(8, 6))
-
-    ttk.Label(planner_controls, text="Assignment", style="BoldLabel.TLabel").grid(row=0, column=0, sticky="w", padx=4)
-    planner_assignment_combo = ttk.Combobox(planner_controls, textvariable=planner_assignment_var, state="readonly", width=50)
-    planner_assignment_combo.grid(row=1, column=0, padx=4, pady=(3, 0), sticky="ew")
-
-    ttk.Label(planner_controls, text="TODO Date (MM/DD)", style="BoldLabel.TLabel").grid(row=0, column=1, sticky="w", padx=4)
-    ttk.Entry(planner_controls, textvariable=planner_todo_date_var, width=14).grid(row=1, column=1, padx=4, pady=(3, 0), sticky="ew")
-
-    ttk.Label(planner_controls, text="TODO Time (HH:MM 24hr)", style="BoldLabel.TLabel").grid(row=0, column=2, sticky="w", padx=4)
-    ttk.Entry(planner_controls, textvariable=planner_todo_time_var, width=14).grid(row=1, column=2, padx=4, pady=(3, 0), sticky="ew")
-
-    add_planner_assignment_btn = ttk.Button(planner_controls, text="Add Assignment to TODO", bootstyle="primary")
-    add_planner_assignment_btn.grid(row=1, column=3, padx=4, pady=(3, 0), sticky="ew")
-
-    ttk.Label(planner_controls, text="Event Title", style="BoldLabel.TLabel").grid(row=2, column=0, sticky="w", padx=4, pady=(10, 0))
-    ttk.Entry(planner_controls, textvariable=planner_event_title_var).grid(row=3, column=0, padx=4, pady=(3, 0), sticky="ew")
-
-    ttk.Label(planner_controls, text="Event Class (optional)", style="BoldLabel.TLabel").grid(row=2, column=1, sticky="w", padx=4, pady=(10, 0))
-    ttk.Entry(planner_controls, textvariable=planner_event_class_var, width=16).grid(row=3, column=1, padx=4, pady=(3, 0), sticky="ew")
-
-    add_planner_event_btn = ttk.Button(planner_controls, text="Add Event", bootstyle="success")
-    add_planner_event_btn.grid(row=3, column=3, padx=4, pady=(3, 0), sticky="ew")
-
-    for col in range(4):
-        planner_controls.columnconfigure(col, weight=1)
-
-    table_planner = build_planner_table(tab_planner)
-
-    # Handlers
-    handlers = ActionHandlers(
-        app=app,
-        notebook=notebook,
-        tab_all=tab_all,
-        tab_flagged=tab_flagged,
-        tab_settings=tab_settings,
-        tab_planner=tab_planner,
-        table_all=table_all,
-        table_flagged=table_flagged,
-        table_planner=table_planner,
-        style=style,
-        state=state,
-        date_var=date_var,
-        time_var=time_var,
-        class_var=class_var,
-        assignment_var=assignment_var,
-        score_var=score_var,
-        grade_var=grade_var,
-        max_points_var=max_points_var,
-        planner_assignment_var=planner_assignment_var,
-        planner_todo_date_var=planner_todo_date_var,
-        planner_todo_time_var=planner_todo_time_var,
-        planner_event_title_var=planner_event_title_var,
-        planner_event_class_var=planner_event_class_var,
-    )
-
-    planner_assignment_combo.configure(values=handlers.planner_assignment_options())
-    add_planner_assignment_btn.configure(command=handlers.add_assignment_to_planner_from_dropdown)
-    add_planner_event_btn.configure(command=handlers.add_event_to_planner)
-
-    ttk.Button(input_frame, text="Clear", command=handlers.clear_inputs, bootstyle="secondary").grid(
-        row=1,
-        column=7,
-        padx=(10, 0),
-        pady=(3, 0),
-        sticky="e",
-    )
-
-    # Bind selection + context menus
-    table_all.bind("<<TreeviewSelect>>", lambda e: handlers.capture_selection(table_all))
-    table_all.bind("<Button-3>", lambda e: handlers.on_right_click_any(table_all, e))
-    table_all.bind("<Button-2>", lambda e: handlers.on_right_click_any(table_all, e))
-
-    table_flagged.bind("<<TreeviewSelect>>", lambda e: handlers.capture_selection(table_flagged))
-    table_flagged.bind("<Button-3>", lambda e: handlers.on_right_click_any(table_flagged, e))
-    table_flagged.bind("<Button-2>", lambda e: handlers.on_right_click_any(table_flagged, e))
-    table_flagged.bind("<Double-1>", handlers.on_double_click_flagged)
-
-    table_planner.bind("<<TreeviewSelect>>", lambda e: handlers.capture_selection(table_planner))
-
-    # Ctrl+Z undo
-    app.bind_all("<Control-z>", lambda e: handlers.undo_last_action())
-    app.bind_all("<Control-Z>", lambda e: handlers.undo_last_action())
-    app.bind_all("<Delete>", lambda e: handlers.delete_selected())
-
-    # Buttons
-    button_frame = ttk.Labelframe(sidebar, text="Actions", padding=(12, 10), bootstyle="primary")
-    button_frame.pack(fill="x", pady=(4, 0))
-
-    ttk.Button(button_frame, text="Add Assignment", command=handlers.add_assignment, bootstyle="success").pack(fill="x", pady=3)
-    ttk.Button(button_frame, text="Edit Selected", command=handlers.load_selected, bootstyle="info").pack(fill="x", pady=3)
-    ttk.Button(button_frame, text="Update Assignment", command=handlers.update_assignment, bootstyle="warning").pack(fill="x", pady=3)
-    ttk.Button(button_frame, text="Delete Selected", command=handlers.delete_selected, bootstyle="danger").pack(fill="x", pady=3)
-    ttk.Button(button_frame, text="Toggle Complete", command=handlers.toggle_complete, bootstyle="primary").pack(fill="x", pady=3)
-    ttk.Button(
-        button_frame,
-        text="Download All Assignments",
-        command=handlers.download_all_assignments_spreadsheet,
-        bootstyle="light",
-    ).pack(fill="x", pady=3)
-    ttk.Button(button_frame, text="Undo (Ctrl+Z)", command=handlers.undo_last_action, bootstyle="secondary").pack(fill="x", pady=3)
-
-    # Settings tab
-    build_settings_tab(
-        tab_settings=tab_settings,
-        state=state,
-        style=style,
-        get_all_treeviews=handlers.get_all_treeviews,
-        refresh_tables=lambda: handlers.refresh_tables(),
-    )
-
-    configure_tags(table_all, state.settings)
-    configure_tags(table_flagged, state.settings)
-    configure_tags(table_planner, state.settings)
-
-    # Initial load/refresh incl class tabs
-    handlers.refresh_tables(jump=True)
-    planner_assignment_combo.configure(values=handlers.planner_assignment_options())
-
-    notebook.bind("<<NotebookTabChanged>>", lambda e: planner_assignment_combo.configure(values=handlers.planner_assignment_options()))
-
-    app.mainloop()
+    server = ThreadingHTTPServer((HOST, PORT), SchedulerHandler)
+    print(f"Scheduler web UI running at http://{HOST}:{PORT}")
+    server.serve_forever()
 
 
 if __name__ == "__main__":
