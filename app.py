@@ -206,14 +206,25 @@ INDEX_HTML = """
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Scheduler</title>
   <style>
-    :root { --bg-start:#0b1220; --bg-end:#1b2a4a; --panel:#121b2f; --card:#17233c; --row:#0f1931; --text:#e7ecf7; --muted:#9fb0d1; --acc:#6ea8fe; }
+    :root {
+      --bg-start:#0b1220;
+      --bg-end:#1b2a4a;
+      --panel:#121b2f;
+      --card:#17233c;
+      --row:#0f1931;
+      --text:#e7ecf7;
+      --muted:#9fb0d1;
+      --acc:#6ea8fe;
+      --input-bg:#0e1830;
+      --input-border:#2d3a58;
+    }
     * { box-sizing:border-box; font-family: Inter, Segoe UI, system-ui, sans-serif; }
     body { margin:0; background:linear-gradient(170deg,var(--bg-start),var(--bg-end)); color:var(--text); }
     .wrap { max-width:1200px; margin:0 auto; padding:24px; }
     .hero, .card { background:color-mix(in srgb, var(--card) 92%, transparent); border:1px solid rgba(255,255,255,.08); border-radius:24px; padding:18px; box-shadow:0 16px 40px rgba(0,0,0,.28); }
     .hero h1 { margin:0; }
     .grid { display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:16px; }
-    input, select, button, textarea { width:100%; border-radius:14px; border:1px solid rgba(255,255,255,.14); background:#0e1830; color:var(--text); padding:10px; }
+    input, select, button, textarea { width:100%; border-radius:14px; border:1px solid var(--input-border); background:var(--input-bg); color:var(--text); padding:10px; }
     button { background:linear-gradient(130deg,#4e8cff,#7da8ff); border:none; font-weight:600; cursor:pointer; }
     table { width:100%; border-collapse:separate; border-spacing:0 8px; }
     td,th { text-align:left; padding:10px; }
@@ -228,7 +239,7 @@ INDEX_HTML = """
     .tabs { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
     .tab { width:auto; padding:8px 14px; border-radius:999px; background:#0e1830; border:1px solid rgba(255,255,255,.2); }
     .tab.active { background:linear-gradient(130deg,#4e8cff,#7da8ff); color:#071226; }
-    .settings-grid { display:grid; grid-template-columns:repeat(3,minmax(120px,1fr)); gap:10px; margin-top:12px; }
+    .settings-grid { display:grid; grid-template-columns:repeat(3,minmax(150px,1fr)); gap:10px; margin-top:12px; }
     .hidden { display:none; }
   </style>
 </head>
@@ -237,11 +248,6 @@ INDEX_HTML = """
   <div class="hero">
     <h1>Scheduler — Modern Edition</h1>
     <div style="color:var(--muted)">Rounded interface, cleaner contrast, and no Tkinter.</div>
-    <div class="settings-grid">
-      <label>Background Start <input id="bgStart" type="color" value="#0b1220" onchange="updateTheme()" /></label>
-      <label>Background End <input id="bgEnd" type="color" value="#1b2a4a" onchange="updateTheme()" /></label>
-      <label>Card Background <input id="cardBg" type="color" value="#17233c" onchange="updateTheme()" /></label>
-    </div>
     <div class="tabs" id="tabs"></div>
   </div>
 
@@ -281,6 +287,23 @@ INDEX_HTML = """
   <div id="plannerSection" class="hidden">
     <h3 class="section-title">Planner</h3>
     <div class="card"><table><thead><tr><th>Type</th><th>When</th><th>Class</th><th>Title</th><th></th></tr></thead><tbody id="planner"></tbody></table></div>
+  </div>
+
+  <div id="settingsSection" class="hidden">
+    <h3 class="section-title">Settings</h3>
+    <div class="card">
+      <div class="settings-grid">
+        <label>Background Start <input id="bgStart" type="color" value="#0b1220" onchange="updateTheme()" /></label>
+        <label>Background End <input id="bgEnd" type="color" value="#1b2a4a" onchange="updateTheme()" /></label>
+        <label>Card Background <input id="cardBg" type="color" value="#17233c" onchange="updateTheme()" /></label>
+        <label>Row Background <input id="rowBg" type="color" value="#0f1931" onchange="updateTheme()" /></label>
+        <label>Primary Text <input id="textColor" type="color" value="#e7ecf7" onchange="updateTheme()" /></label>
+        <label>Muted Text <input id="mutedColor" type="color" value="#9fb0d1" onchange="updateTheme()" /></label>
+        <label>Accent Color <input id="accentColor" type="color" value="#6ea8fe" onchange="updateTheme()" /></label>
+        <label>Input Background <input id="inputBg" type="color" value="#0e1830" onchange="updateTheme()" /></label>
+        <label>Input Border <input id="inputBorder" type="color" value="#2d3a58" onchange="updateTheme()" /></label>
+      </div>
+    </div>
   </div>
 </div>
 <script>
@@ -328,9 +351,21 @@ INDEX_HTML = """
     document.documentElement.style.setProperty('--bg-start', colors.bgStart);
     document.documentElement.style.setProperty('--bg-end', colors.bgEnd);
     document.documentElement.style.setProperty('--card', colors.cardBg);
+    document.documentElement.style.setProperty('--row', colors.rowBg);
+    document.documentElement.style.setProperty('--text', colors.textColor);
+    document.documentElement.style.setProperty('--muted', colors.mutedColor);
+    document.documentElement.style.setProperty('--acc', colors.accentColor);
+    document.documentElement.style.setProperty('--input-bg', colors.inputBg);
+    document.documentElement.style.setProperty('--input-border', colors.inputBorder);
     document.getElementById('bgStart').value = colors.bgStart;
     document.getElementById('bgEnd').value = colors.bgEnd;
     document.getElementById('cardBg').value = colors.cardBg;
+    document.getElementById('rowBg').value = colors.rowBg;
+    document.getElementById('textColor').value = colors.textColor;
+    document.getElementById('mutedColor').value = colors.mutedColor;
+    document.getElementById('accentColor').value = colors.accentColor;
+    document.getElementById('inputBg').value = colors.inputBg;
+    document.getElementById('inputBorder').value = colors.inputBorder;
   }
 
   function updateTheme(){
@@ -338,6 +373,12 @@ INDEX_HTML = """
       bgStart: document.getElementById('bgStart').value,
       bgEnd: document.getElementById('bgEnd').value,
       cardBg: document.getElementById('cardBg').value,
+      rowBg: document.getElementById('rowBg').value,
+      textColor: document.getElementById('textColor').value,
+      mutedColor: document.getElementById('mutedColor').value,
+      accentColor: document.getElementById('accentColor').value,
+      inputBg: document.getElementById('inputBg').value,
+      inputBorder: document.getElementById('inputBorder').value,
     };
     applyTheme(colors);
     localStorage.setItem('schedulerTheme', JSON.stringify(colors));
@@ -351,7 +392,7 @@ INDEX_HTML = """
 
   function renderTabs(assignments){
     const classes = [...new Set(assignments.map(a => a.Class).filter(Boolean))].sort();
-    const tabs = ['All', ...classes, 'Planner'];
+    const tabs = ['All', 'Flagged', ...classes, 'Planner', 'Settings'];
     if(!tabs.includes(activeTab)){ activeTab = 'All'; }
     const tabsEl = document.getElementById('tabs');
     tabsEl.innerHTML = '';
@@ -364,20 +405,29 @@ INDEX_HTML = """
     });
 
     const onPlanner = activeTab === 'Planner';
+    const onSettings = activeTab === 'Settings';
     document.getElementById('plannerFormSection').classList.toggle('hidden', !onPlanner);
     document.getElementById('plannerSection').classList.toggle('hidden', !onPlanner);
-    document.getElementById('assignmentsSection').classList.toggle('hidden', onPlanner);
+    document.getElementById('settingsSection').classList.toggle('hidden', !onSettings);
+    document.getElementById('formsGrid').classList.toggle('hidden', onPlanner || onSettings);
+    document.getElementById('assignmentsSection').classList.toggle('hidden', onPlanner || onSettings);
   }
 
   function renderTables(){
-    const filteredAssignments = activeTab === 'All' || activeTab === 'Planner'
+    const filteredAssignments = activeTab === 'All' || activeTab === 'Planner' || activeTab === 'Settings'
       ? currentAssignments
-      : currentAssignments.filter(a => a.Class === activeTab);
+      : activeTab === 'Flagged'
+        ? currentAssignments.filter(a => a.Flagged)
+        : currentAssignments.filter(a => a.Class === activeTab);
 
     const tbody = document.getElementById('assignments'); tbody.innerHTML='';
     filteredAssignments.forEach(a=>{
-      const status = `${a.Complete?'<span class="pill ok">Complete</span>':''} ${a.Flagged?'<span class="pill flag">Flagged</span>':''}` || '<span class="pill warn">Open</span>';
-      const points = a.Score || a.MaxPoints ? `${a.Score || '-'} / ${a.MaxPoints || '-'}` : '-';
+      const statuses = [];
+      if(a.Complete){ statuses.push('<span class="pill ok">Complete</span>'); }
+      if(a.Flagged){ statuses.push('<span class="pill flag">Flagged</span>'); }
+      if(!statuses.length){ statuses.push('<span class="pill warn">Open</span>'); }
+      const status = statuses.join(' ');
+      const points = a.Score && a.MaxPoints ? `${a.Score}/${a.MaxPoints}` : (a.Score || a.MaxPoints ? `${a.Score || '-'}/${a.MaxPoints || '-'}` : '-');
       const tr = document.createElement('tr');
       tr.innerHTML = `<td>${a.Date} ${a.Time}</td><td>${a.Class}</td><td>${a.Assignment}</td><td>${a.Grade || '-'}</td><td>${points}</td><td>${status}</td>
       <td class="actions"><button onclick='editAssignment(${a.id})'>Edit</button><button onclick='toggle(${a.id},"Complete")'>✓</button><button onclick='toggle(${a.id},"Flagged")'>🚩</button><button onclick='delAssignment(${a.id})'>Delete</button></td>`;
